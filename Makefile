@@ -37,6 +37,7 @@ $(OBJ_DIR)/%.o: %.c
 clean:
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@if [ -d $(MLX_DIR) ]; then $(MAKE) -C $(MLX_DIR) clean; fi
 
 fclean: clean
 	@rm -f $(NAME)
