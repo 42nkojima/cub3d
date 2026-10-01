@@ -1,5 +1,7 @@
 name: Build Check
 
+run-name: "Build: ${{ github.event.pull_request.title || github.ref_name }}"
+
 on: [push, pull_request]
 
 concurrency:
