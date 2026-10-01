@@ -2,6 +2,12 @@
 
 ## セットアップ
 
+minilibx-linux はリポジトリに含めない。intra の `minilibx-linux.tgz` を落としてきて、リポジトリ直下に展開する。未展開のままだと push 時の `make` が失敗して push できない（急ぎなら `LEFTHOOK=0 git push`）。
+
+```sh
+tar xzf ~/Downloads/minilibx-linux.tgz
+```
+
 commit 時に norminette、push 時に `make` を自動で走らせるため、[lefthook](https://github.com/evilmartians/lefthook) を入れる。
 
 ```sh
@@ -18,7 +24,7 @@ CI（GitHub Actions）でも push / PR ごとに norminette とビルドが走�
 make
 ```
 
-minilibx-linux はリポジトリに含めない。intra の `minilibx-linux.tgz` をリポジトリ直下に展開してから `make` する。Mac は [XQuartz](https://www.xquartz.org/) が必要。
+Mac は [XQuartz](https://www.xquartz.org/) が必要。
 
 ## 命名規則
 
