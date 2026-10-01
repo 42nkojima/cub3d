@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:55:56 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:24:56 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/21 17:13:17 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 18:05:11 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_digits(int n)
+/* Counts the number of digits in an integer */
+static size_t	count_digits(long n)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
-	if (n < 0)
-		count++;
+	if (n <= 0)
+		count = 1;
 	while (n != 0)
 	{
 		n /= 10;
@@ -27,49 +28,61 @@ static int	ft_count_digits(int n)
 	return (count);
 }
 
-static char	*ft_convert_to_str(char *str, int n, int len)
-{
-	str[len] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		n = -n;
-	}
-	while (n > 0)
-	{
-		str[len - 1] = (n % 10) + '0';
-		n /= 10;
-		len--;
-	}
-	return (str);
-}
-
+/**
+ * Converts an integer to a string
+ *
+ * Params:
+ * @n: The integer to convert
+ *
+ * Return:
+ * A new allocated string representing the integer,
+ * or NULL if allocation fails
+ */
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		len;
+	size_t	digits;
+	long	num;
 
-	if (n == INT_MIN)
-		return (ft_strdup("-2147483648"));
-	if (n == 0)
-		return (ft_strdup("0"));
-	len = ft_count_digits(n);
-	str = malloc((len + 1));
+	num = n;
+	digits = count_digits(num);
+	str = malloc(sizeof(*str) * (digits + 1));
 	if (!str)
 		return (NULL);
-	if (n < 0)
+	str[digits] = '\0';
+	if (num < 0)
 	{
 		str[0] = '-';
-		n = -n;
+		num = -num;
 	}
-	str = ft_convert_to_str(str, n, len);
+	if (num == 0)
+		str[0] = '0';
+	while (num > 0)
+	{
+		str[--digits] = (num % 10) + '0';
+		num /= 10;
+	}
 	return (str);
 }
-// int main(void)
+
+// #include <stdio.h>
+
+// int	main(void)
 // {
-// 	int num = 0;
-// 	char *result = ft_itoa(num);
-// 	printf("The converted string is %s\n", result);
-// 	free(result);
-// 	return 0;
+// 	char	*result;
+// 	int		test_values[] = {0, 42, -42, 2147483647, -2147483648, 123456789,
+// 				-123456789, 1, -1};
+// 	int		i;
+// 	int		num_tests;
+
+// 	num_tests = sizeof(test_values) / sizeof(test_values[0]);
+// 	i = 0;
+// 	while (i < num_tests)
+// 	{
+// 		result = ft_itoa(test_values[i]);
+// 		printf("Input: %d\nOutput: \"%s\"\n\n", test_values[i], result);
+// 		free(result);
+// 		i++;
+// 	}
+// 	return (0);
 // }
