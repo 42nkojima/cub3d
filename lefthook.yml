@@ -1,0 +1,7 @@
+pre-commit:
+  commands:
+    norminette:
+      glob: "*.{c,h}"
+      exclude:
+        - "minilibx-linux/**"
+      run: norminette {staged_files}
