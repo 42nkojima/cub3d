@@ -10,9 +10,7 @@ LIBFT_DIR   = libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
 MLX_DIR     = minilibx-linux
-MLX_REPO    = https://github.com/42paris/minilibx-linux.git
 MLX_LIB     = $(MLX_DIR)/libmlx.a
-MLX_HEADER  = $(MLX_DIR)/mlx.h
 INCLUDES    = -I. -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 UNAME_S     := $(shell uname -s)
@@ -29,13 +27,10 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-$(MLX_LIB): $(MLX_HEADER)
+$(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR)
 
-$(MLX_HEADER):
-	git clone --depth 1 $(MLX_REPO) $(MLX_DIR)
-
-$(OBJ_DIR)/%.o: %.c | $(MLX_HEADER)
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

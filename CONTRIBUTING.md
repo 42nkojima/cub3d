@@ -18,7 +18,7 @@ CI（GitHub Actions）でも push / PR ごとに norminette とビルドが走�
 make
 ```
 
-minilibx-linux が無ければ `make` 時に自動で clone される。Mac は [XQuartz](https://www.xquartz.org/) が必要。
+minilibx-linux はリポジトリに含めない。intra の `minilibx-linux.tgz` をリポジトリ直下に展開してから `make` する。Mac は [XQuartz](https://www.xquartz.org/) が必要。
 
 ## 命名規則
 
