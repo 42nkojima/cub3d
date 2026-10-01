@@ -3,46 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:56:38 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:45:31 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/21 12:32:20 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 19:10:07 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+/**
+ * Duplicates a string by allocating memory and copying its content.
+ *
+ * Params:
+ * @str: The string to duplicate.
+ *
+ * Return:
+ * - A pointer to the duplicated string, or NULL on failure.
+ */
+char	*ft_strdup(const char *str)
 {
-	char	*dup;
-	size_t	len;
+	size_t	str_len;
+	char	*ptr;
 
-	if (!s1)
+	str_len = ft_strlen(str);
+	ptr = malloc(str_len + 1);
+	if (!ptr)
 		return (NULL);
-	len = ft_strlen(s1) + 1;
-	dup = malloc(len);
-	if (!dup)
-		return (NULL);
-	ft_memcpy(dup, s1, len);
-	return (dup);
+	ft_memcpy(ptr, str, str_len + 1);
+	return (ptr);
 }
 
-// int main(void)
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
 // {
-// 	const char *original = "Hello, World!";
-// 	char *duplicate;
+// 	char	str[42] = "Hello, world!";
+// 	char	*ft_dup;
+// 	char	*dup;
 
-// 	duplicate = ft_strdup(original);
-// 	if (duplicate)
-// 	{
-// 		printf("Original: %s\n", original);
-// 		printf("Duplicate: %s\n", duplicate);
-// 		free(duplicate);
-// 	}
-// 	else
-// 	{
-// 		printf("Memory allocation failed\n");
-// 	}
-
-// 	return 0;
+// 	ft_dup = ft_strdup(str);
+// 	dup = strdup(str);
+// 	printf("ft: %s\n", ft_dup);
+// 	printf("  : %s\n", dup);
+// 	free(ft_dup);
+// 	free(dup);
+// 	return (0);
 // }

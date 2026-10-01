@@ -3,28 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:57:03 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:48:02 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/20 23:33:59 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 20:09:11 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+/**
+ * Returns a pointer to the last occurrence of the character c in the string s.
+ *
+ * Params:
+ * @s: The string to search.
+ * @c: The character to find.
+ *
+ * Return:
+ * A pointer to the first occurrence of the character `c` in the string `s`,
+ * or NULL if the character is not found.
+ */
+char	*ft_strrchr(const char *str, int c)
 {
-	const char	*last = NULL;
+	size_t		len;
+	char		cc;
+	const char	*ptr;
 
-	if (!s)
-		return (NULL);
-	while (*s)
+	len = ft_strlen(str);
+	cc = (char)c;
+	ptr = str + len;
+	while (1)
 	{
-		if (*s == (char)c)
-			last = s;
-		s++;
+		if (*ptr == cc)
+			return ((char *)ptr);
+		if (ptr == str)
+			break ;
+		ptr--;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return ((char *)last);
+	return (NULL);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	str[42] = "Hello, world!";
+
+// 	printf("ft: %s\n", ft_strrchr(str, '!'));
+// 	printf("  : %s\n", strrchr(str, '!'));
+// 	printf("ft: %s\n", ft_strrchr(str, '\0'));
+// 	printf("  : %s\n", strrchr(str, '\0'));
+// 	return (0);
+// }

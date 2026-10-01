@@ -3,37 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:56:47 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/08 15:36:58 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/14 19:31:38 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 19:33:11 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+/**
+ * Copies up to dstsize - 1 characters from the string `src` to `dst`,
+ * null-terminating the result if dstsize is not 0.
+ *
+ * Params:
+ * @dst: The destination buffer where the string will be copied.
+ * @src: The source string to copy from.
+ * @dstsize: The size of the destination buffer.
+ *
+ * Return:
+ * The total length of the string it tried to create (length of src).
+ */
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
+	size_t	src_len;
 	size_t	i;
 
+	src_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (src_len);
 	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src[i] && i < size - 1)
+	while (src[i] && i < dstsize - 1)
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
-	if (size > 0)
-		dest[i] = '\0';
-	return (ft_strlen(src));
+	dst[i] = '\0';
+	return (src_len);
 }
 
-// int main(void)
-// {
-// 	char dest[30];
-// 	char src[] = "Hello, World, this is a test";
+// #include <bsd/string.h>
+// #include <stdio.h>
 
-// 	printf("%zu\n", ft_strlcpy(dest, src, sizeof(dest)));
-// 	printf("%s", dest);
+// int	main(void)
+// {
+// 	char	ft_dst[10];
+// 	size_t	ft_len;
+// 	char	dst[10];
+// 	size_t	len;
+
+// 	ft_len = ft_strlcpy(ft_dst, "Hello, world!", sizeof(ft_dst));
+// 	len = strlcpy(dst, "Hello, world!", sizeof(dst));
+// 	printf("ft: %s %zu\n", ft_dst, ft_len);
+// 	printf("  : %s %zu\n", dst, len);
+// 	return (0);
 // }

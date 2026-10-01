@@ -3,88 +3,79 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmase <tmase@student.42.fr>                +#+  +:+       +#+         #
+#    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/25 13:19:20 by tmase             #+#    #+#              #
-#    Updated: 2026/10/01 15:46:24 by tmase            ###   ########.fr        #
+#    Created: 2025/04/26 16:47:58 by nkojima           #+#    #+#              #
+#    Updated: 2025/10/15 22:59:11 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = libft.a
-CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
+#################################
+#            Settings           #
+#################################
+NAME      = libft.a
+CFLAGS    = -Wall -Wextra -Werror
+ARFLAGS   = rcs
 
-SRCS        = ft_strlen.c \
-              ft_strlcpy.c \
-              ft_strlcat.c \
-              ft_strchr.c \
-              ft_strrchr.c \
-              ft_strnstr.c \
-              ft_strncmp.c \
-              ft_memset.c \
-              ft_bzero.c \
-              ft_memcpy.c \
-              ft_memchr.c \
-              ft_memmove.c \
-              ft_memcmp.c \
-              ft_atoi.c \
-              ft_isalpha.c \
-              ft_isdigit.c \
-              ft_isalnum.c \
-              ft_isascii.c \
-              ft_isprint.c \
-              ft_toupper.c \
-              ft_tolower.c \
-              ft_calloc.c \
-              ft_strdup.c \
-              ft_substr.c \
-              ft_strjoin.c \
-              ft_strtrim.c \
-              ft_split.c \
-              ft_itoa.c \
-              ft_strmapi.c \
-              ft_putchar_fd.c \
-              ft_putstr_fd.c \
-              ft_putendl_fd.c \
-              ft_putnbr_fd.c \
-              ft_striteri.c \
+#################################
+#         Source & Objects      #
+#################################
+SRC_FILES = isalpha \
+			isdigit \
+			isalnum \
+			isascii \
+			isprint \
+			strlen \
+			memset \
+			bzero \
+			memcpy \
+			memmove \
+			strlcpy \
+			strlcat \
+			toupper \
+			tolower \
+			strchr \
+			strrchr \
+			strcmp \
+			strncmp \
+			memchr \
+			memcmp \
+			strnstr \
+			atoi \
+			atold \
+			calloc \
+			strdup \
+			substr \
+			strjoin \
+			strtrim \
+			split \
+			itoa \
+			strmapi \
+			striteri \
+			putchar_fd \
+			putstr_fd \
+			putendl_fd \
+			putnbr_fd
+SRCS 	   = $(addprefix ft_, $(addsuffix .c, $(SRC_FILES))) get_next_line.c
+OBJS       = $(SRCS:.c=.o)
 
-BONUS_SRCS  = ft_lstnew.c \
-              ft_lstadd_front.c \
-              ft_lstsize.c \
-              ft_lstlast.c \
-              ft_lstadd_back.c \
-              ft_lstdelone.c \
-              ft_lstclear.c \
-              ft_lstiter.c \
-              ft_lstmap.c
-
-# obj ディレクトリとオブジェクトファイルのパス指定
-OBJ_DIR     = obj
-OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-BONUS_OBJS  = $(addprefix $(OBJ_DIR)/, $(BONUS_SRCS:.c=.o))
-
-RM          = rm -f
-
+#################################
+#            Rules              #
+#################################
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $@ $^
+	$(AR) $(ARFLAGS) $@ $?
 
-bonus: $(NAME) $(BONUS_OBJS)
-	ar rc $(NAME) $(BONUS_OBJS)
-
-# obj ディレクトリを自動作成しながらコンパイル
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -fPIC -c $< -o $@
+%.o: %.c libft.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -r $(OBJ_DIR)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

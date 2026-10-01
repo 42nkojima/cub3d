@@ -3,39 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:56:56 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/09 17:37:57 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/20 23:34:32 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 19:46:33 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * It compares only the first (at most) n bytes of s1 and s2.
+ *
+ * Params:
+ * @s1: The first string to compare.
+ * @s2: The second string to compare.
+ * @n: The maximum number of characters to compare.
+ *
+ * Return:
+ * - 0, if the `s1` and `s2` are equal.
+ * - A negative value if `s1` is less than `s2`.
+ * - A positive value if `s1` is greater than `s2`.
+ */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	c1;
-	unsigned char	c2;
+	size_t	count;
 
-	if (n == 0)
-		return (0);
-	i = 0;
-	while (i < n && (s1[i] || s2[i]))
+	count = 0;
+	while (count < n && *s1 && (*s1 == *s2))
 	{
-		c1 = (unsigned char)s1[i];
-		c2 = (unsigned char)s2[i];
-		if (c1 != c2)
-			return (c1 - c2);
-		i++;
+		s1++;
+		s2++;
+		count++;
 	}
-	return (0);
+	if (count == n)
+		return (0);
+	return ((const unsigned char)*s1 - (const unsigned char)*s2);
 }
 
-// int main(void)
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
 // {
-// 	char *s1 = NULL;
-// 	char *s2 = "aa";
-// 	int a = ft_strncmp(s1, s2, 2);
-// 	printf("%d", a);
+// 	size_t	n;
+// 	char	s1[42] = "Hello, world!";
+// 	char	s2[42] = "Helwo, w0rld!";
+
+// 	n = 3;
+// 	printf("ft: %d\n", ft_strncmp(s1, s2, n));
+// 	printf("  : %d\n", strncmp(s1, s2, n));
+// 	return (0);
 // }

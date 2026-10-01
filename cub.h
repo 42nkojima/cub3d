@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/01 18:46:24 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/01 19:07:18 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef enum e_dir
 typedef struct  s_vars{
     char    *tex_path[4];
     t_dir     direction;
-    int        top_color;
-    int        bottom_color;
+    int        ceiling_color;
+    int        floor_color;
     char     **map;
     int        width;
     int        height;

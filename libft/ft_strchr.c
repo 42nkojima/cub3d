@@ -3,26 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:56:35 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:45:26 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/20 23:33:14 by nkojima           #+#    #+#             */
+/*   Updated: 2025/06/02 14:07:52 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+/**
+ * Finds the first occurrence of a character in a string.
+ *
+ * Params:
+ * @s: The string to search.
+ * @c: The character to find.
+ *
+ * Return:
+ * A pointer to the first occurrence of the character `c` in the string `s`,
+ * or NULL if the character is not found.
+ */
+char	*ft_strchr(const char *str, int c)
 {
-	if (!s)
-		return (NULL);
-	while (*s)
+	while (*str != (char)c)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (*str == '\0')
+			return (NULL);
+		str++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return ((char *)str);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	char	str[42] = "Hello, world!";
+
+// 	printf("ft: %s\n", ft_strchr(str, '\0'));
+// 	printf("  : %s\n", strchr(str, '\0'));
+// 	return (0);
+// }
