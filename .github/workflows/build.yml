@@ -1,0 +1,46 @@
+name: Build Check
+
+run-name: "Build: ${{ github.event.pull_request.title || github.ref_name }}"
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install minilibx dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-dev libxext-dev libbsd-dev
+
+      - name: Fetch minilibx
+        # intra 配布の minilibx-linux.tgz と同じコミット
+        run: |
+          git clone https://github.com/42paris/minilibx-linux.git
+          git -C minilibx-linux checkout 7dc53a411a7d4ae286c60c6229bd1e395b0efb82
+
+      - name: Clean before first build
+        run: make fclean
+
+      - name: Build
+        run: make
+
+      - name: Check no relink
+        run: make -q
+
+      - name: Rebuild
+        run: make re

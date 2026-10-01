@@ -5,3 +5,8 @@ pre-commit:
       exclude:
         - "minilibx-linux/**"
       run: norminette {staged_files}
+
+pre-push:
+  commands:
+    build:
+      run: make

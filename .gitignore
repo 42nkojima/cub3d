@@ -1,4 +1,5 @@
-obj
+cub3D
+*.a
 *.o
 minilibx-linux
 en.subject.pdf
