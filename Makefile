@@ -11,12 +11,13 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 
 MLX_DIR     = minilibx-linux
 MLX_LIB     = $(MLX_DIR)/libmlx.a
-INCLUDES    = -I. -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 UNAME_S     := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
+X11_INC     = -I/opt/X11/include
 X11_FLAGS   = -L/opt/X11/lib
 endif
+INCLUDES    = -I. -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
 MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
