@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:26:22 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/07 21:31:28 by tmase            ###   ########.fr       */
+/*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
+/*   Updated: 2026/10/01 19:07:18 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CUB_H
+# define CUB_H
 
-t_list	*ft_lstlast(t_list *lst)
+typedef enum e_dir
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_dir;
+
+typedef struct  s_vars{
+    char    *tex_path[4];
+    t_dir     direction;
+    int        ceiling_color;
+    int        floor_color;
+    char     **map;
+    int        width;
+    int        height;
+    int        col;
+    int        row;
+}                       t_vars;
+
+#endif

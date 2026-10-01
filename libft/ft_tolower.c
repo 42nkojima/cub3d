@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:57:12 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/07 20:55:59 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/14 19:10:08 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 20:16:49 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
 
+static int	ft_isupper(int c)
+{
+	return ('A' <= c && c <= 'Z');
+}
+
+/**
+ * Converts a uppercase letter to lowercase.
+ */
 int	ft_tolower(int c)
 {
-	if ('A' <= c && c <= 'Z')
-		return (c + 32);
+	if (ft_isupper(c))
+		return (c - ('A' - 'a'));
 	return (c);
 }
 
-// int main(void)
+// #include <ctype.h>
+// #include <stdio.h>
+
+// int	main(void)
 // {
-// 	printf("%c\n", (char)ft_tolower('A' - 1));
-// 	printf("%c\n", (char)ft_tolower('A'));
-// 	printf("%c\n", (char)ft_tolower('Z' + 1));
-// 	printf("%c\n", (char)ft_tolower('Z'));
+// 	printf("ft_('a'): %d\n", ft_tolower('a'));
+// 	printf("tolower('a'): %d\n", tolower('a'));
+// 	printf("ft_('A'): %d\n", ft_tolower('A'));
+// 	printf("tolower('A'): %d\n", tolower('A'));
+// 	return (0);
 // }

@@ -3,48 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:55:20 by tmase             #+#    #+#             */
-/*   Updated: 2025/08/01 19:11:12 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/21 02:45:57 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 15:28:28 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+static int	ft_isspace(int c)
 {
-	int	sign;
-	int	result;
-
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -sign;
-		str++;
-	}
-	while (*str == '0')
-		str++;
-	if (*str < '1' || *str > '9')
-		return (0);
-	while (*str)
-	{
-		result = (result * 10) + ((*str - '0') * sign);
-		str++;
-		if (*str < '0' || *str > '9')
-			break ;
-	}
-	return (result);
+	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-// int main(void)
+static const char	*skip_whitespace_and_sign(const char *str, int *sign)
+{
+	*sign = 1;
+	while (ft_isspace((int)*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			*sign = -1;
+		str++;
+	}
+	return (str);
+}
+
+static int	convert_digits(const char *str, int sign)
+{
+	long	result;
+	long	limit;
+
+	result = 0;
+	limit = LONG_MAX / 10;
+	while (ft_isdigit((int)*str))
+	{
+		if ((result > limit) || (result == limit && (*str - '0') > LONG_MAX
+				% 10))
+		{
+			if (sign == 1)
+				return ((int)LONG_MAX);
+			else
+				return ((int)LONG_MIN);
+		}
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return ((int)(sign * result));
+}
+
+/**
+ * Converts a string to an integer.
+ *
+ * Skips leading whitespace, handles optional `+` or `-` sign, and converts
+ * numeric characters to an integer until a non-digit is encountered.
+ *
+ * Params:
+ * @str: The string to convert.
+ *
+ * Return:
+ * The integer value represented by the string.
+ */
+int	ft_atoi(const char *str)
+{
+	int			sign;
+	const char	*digits_start;
+
+	digits_start = skip_whitespace_and_sign(str, &sign);
+	return (convert_digits(digits_start, sign));
+}
+
+// #include <stdio.h>
+// #include <stdlib.h>
+
+// int	main(void)
 // {
-// 	char str[] = "1   -23";
-// 	int result = ft_atoi(str);
-// 	printf("The converted number is %d\n", result);
-// 	return 0;
+// 	char	str[42] = "9223372036854775807";
+
+// 	printf("ft: %d\n", ft_atoi(str));
+// 	printf("  : %d\n", atoi(str));
+// 	return (0);
 // }

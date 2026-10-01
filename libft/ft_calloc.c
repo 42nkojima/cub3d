@@ -3,48 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:55:27 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:58:11 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/21 12:32:00 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 15:31:10 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdint.h>
 
-void	*ft_calloc(size_t count, size_t size)
+/**
+ * Allocates memory for an array and initializes it to zero.
+ *
+ * Params:
+ * @nmemb: Number of elements.
+ * @size: Size of each element in bytes.
+ *
+ * Return:
+ * - Pointer to the allocated memory, or NULL on failure.
+ */
+void	*ft_calloc(size_t nmemb, size_t size)
 {
+	size_t	total;
 	void	*ptr;
 
-	if (count != 0 && size > SIZE_MAX / count)
+	if (!nmemb || !size)
+		return (malloc(0));
+	if (nmemb > SIZE_MAX / size)
 		return (NULL);
-	ptr = malloc(count * size);
+	total = nmemb * size;
+	ptr = malloc(total);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, count * size);
+	ft_bzero(ptr, total);
 	return (ptr);
 }
 
-// int main(void)
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+
+// int	main(void)
 // {
-// 	int *arr;
-// 	size_t count = 5;
-// 	size_t size = sizeof(int);
+// 	size_t	n;
+// 	void	*p1;
+// 	void	*p2;
 
-// 	arr = ft_calloc(count, size);
-// 	if (arr == NULL)
-// 	{
-// 		printf("Memory allocation failed\n");
-// 		return (1);
-// 	}
-
-// 	for (size_t i = 0; i < count; i++)
-// 	{
-// 		printf("%d ", arr[i]);
-// 	}
-// 	printf("\n");
-
-// 	free(arr);
-// 	return 0;
+// 	n = 5;
+// 	p1 = calloc(n, 1);
+// 	p2 = ft_calloc(n, 1);
+// 	/* メモリ内容を比較。ゼロ初期化なら memcmp == 0 */
+// 	printf("%s\n", memcmp(p1, p2, n) == 0 ? "same" : "different");
+// 	free(p1);
+// 	free(p2);
+// 	return (0);
 // }

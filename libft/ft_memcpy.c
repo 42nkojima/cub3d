@@ -3,33 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 21:56:07 by tmase             #+#    #+#             */
-/*   Updated: 2025/05/14 15:42:58 by tmase            ###   ########.fr       */
+/*   Created: 2025/05/14 19:27:15 by nkojima           #+#    #+#             */
+/*   Updated: 2025/05/30 18:34:05 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+/**
+ * Copies n bytes from memory area src to memory area dst.
+ *
+ * Params:
+ * @dst: The destination memory area.
+ * @src: The source memory area.
+ * @cpy_size: The number of bytes to copy.
+ *
+ * Return:
+ * A pointer to the destination memory area (dst).
+ */
+void	*ft_memcpy(void *dst, const void *src, size_t cpy_size)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	unsigned char		*dst_ptr;
+	const unsigned char	*src_ptr;
 
-	if ((!dest || !src) && n > 0)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	while (n--)
-		*d++ = *s++;
-	return (dest);
+	if (cpy_size == 0 || dst == src)
+		return (dst);
+	dst_ptr = (unsigned char *)dst;
+	src_ptr = (const unsigned char *)src;
+	while (cpy_size--)
+		*dst_ptr++ = *src_ptr++;
+	return (dst);
 }
 
-// int main(void)
+// #include <stdio.h>
+// #include <string.h>
+
+// int	main(void)
 // {
-// 	char s[10];
-// 	char *s2 = NULL;
-// 	char *a = ft_memcpy (s, s2, 3);
-// 	printf ("%s", a);
+// 	char	ft_src[20] = "Hello, world!";
+// 	char	ft_dst[20] = {0};
+// 	char	src[20] = "Hello, world!";
+// 	char	dst[20] = {0};
+
+// 	ft_memcpy(ft_dst, ft_src, 13);
+// 	printf("ft: dst = \"%s\"\n", ft_dst);
+// 	memcpy(dst, src, 13);
+// 	printf("  : dst = \"%s\"\n", dst);
+// 	// memcpy(NULL, src, 5);
+// 	// ft_memcpy(NULL, src, 5);
+// 	return (0);
 // }
