@@ -1,0 +1,32 @@
+name: Build Check
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install minilibx dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-dev libxext-dev libbsd-dev
+
+      - name: Build
+        run: make
+
+      - name: Check no relink
+        run: make -q
