@@ -22,13 +22,17 @@ MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+$(NAME): $(MLX_LIB) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_LIB):
+	@if [ ! -d $(MLX_DIR) ]; then \
+		echo "$(MLX_DIR) not found: extract minilibx-linux.tgz at the repository root" >&2; \
+		exit 1; \
+	fi
 	@$(MAKE) -C $(MLX_DIR)
 
 $(OBJ_DIR)/%.o: %.c
