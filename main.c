@@ -16,7 +16,7 @@ int	main(void)
 {
 	t_mlx	m;
 
-	if (run_window(&m))
+	if (!render_run(&m))
 		return (1);
 	return (0);
 }

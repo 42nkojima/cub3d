@@ -13,6 +13,8 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+# include <stdbool.h>
+
 # define WIN_W 640
 # define WIN_H 480
 
@@ -22,6 +24,6 @@ typedef struct s_mlx
 	void	*win;
 }			t_mlx;
 
-int			run_window(t_mlx *m);
+bool		render_run(t_mlx *m);
 
 #endif

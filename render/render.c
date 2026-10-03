@@ -14,25 +14,25 @@
 #include "render.h"
 #include <stdlib.h>
 
-static int	open_window(t_mlx *m)
+static bool	render_open_window(t_mlx *m)
 {
 	m->mlx = mlx_init();
 	if (!m->mlx)
-		return (1);
+		return (false);
 	m->win = mlx_new_window(m->mlx, WIN_W, WIN_H, "cub3D");
 	if (!m->win)
 	{
 		mlx_destroy_display(m->mlx);
 		free(m->mlx);
-		return (1);
+		return (false);
 	}
-	return (0);
+	return (true);
 }
 
-int	run_window(t_mlx *m)
+bool	render_run(t_mlx *m)
 {
-	if (open_window(m))
-		return (1);
+	if (!render_open_window(m))
+		return (false);
 	mlx_loop(m->mlx);
-	return (0);
+	return (true);
 }
