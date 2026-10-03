@@ -50,4 +50,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norm:
+	@norminette $$(git ls-files '*.c' '*.h' ':!:minilibx-linux/**')
+
+.PHONY: all clean fclean re norm
