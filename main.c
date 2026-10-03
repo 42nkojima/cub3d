@@ -6,14 +6,17 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 02:17:17 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/04 02:36:46 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "render.h"
 
 int	main(void)
 {
-	printf("Hello");
+	t_mlx	m;
+
+	if (run_window(&m))
+		return (1);
 	return (0);
 }

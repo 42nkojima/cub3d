@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:27:30 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 02:44:54 by nkojima          ###   ########.fr       */
+/*   Created: 2026/10/04 02:25:00 by nkojima           #+#    #+#             */
+/*   Updated: 2026/10/04 02:36:17 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "render.h"
-#include <stdlib.h>
+#ifndef RENDER_H
+# define RENDER_H
 
-static int	open_window(t_mlx *m)
-{
-	m->mlx = mlx_init();
-	if (!m->mlx)
-		return (1);
-	m->win = mlx_new_window(m->mlx, WIN_W, WIN_H, "cub3D");
-	if (!m->win)
-	{
-		mlx_destroy_display(m->mlx);
-		free(m->mlx);
-		return (1);
-	}
-	return (0);
-}
+# define WIN_W 640
+# define WIN_H 480
 
-int	run_window(t_mlx *m)
+typedef struct s_mlx
 {
-	if (open_window(m))
-		return (1);
-	mlx_loop(m->mlx);
-	return (0);
-}
+	void	*mlx;
+	void	*win;
+}			t_mlx;
+
+int			run_window(t_mlx *m);
+
+#endif

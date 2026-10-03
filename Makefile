@@ -2,7 +2,8 @@ NAME        = cub3D
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
-SRCS        = main.c
+SRCS        = main.c \
+			  render/render.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
