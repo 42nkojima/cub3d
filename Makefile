@@ -17,7 +17,7 @@ ifeq ($(UNAME_S),Darwin)
 X11_INC     = -I/opt/X11/include
 X11_FLAGS   = -L/opt/X11/lib
 endif
-INCLUDES    = -I. -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
+INCLUDES    = -I. -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
 MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
@@ -36,7 +36,7 @@ $(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR)
 
 $(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
@@ -50,4 +50,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norm:
+	@norminette $$(git ls-files '*.c' '*.h' ':!:minilibx-linux/**')
+
+.PHONY: all clean fclean re norm
