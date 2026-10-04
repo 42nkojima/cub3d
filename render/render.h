@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 02:36:46 by nkojima          ###   ########.fr       */
+/*   Created: 2026/10/04 02:25:00 by nkojima           #+#    #+#             */
+/*   Updated: 2026/10/04 02:36:17 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#ifndef RENDER_H
+# define RENDER_H
 
-int	main(void)
+# include <stdbool.h>
+
+# define WIN_W 640
+# define WIN_H 480
+
+typedef struct s_mlx
 {
-	t_mlx	m;
+	void	*mlx;
+	void	*win;
+}			t_mlx;
 
-	if (!render_run(&m))
-		return (1);
-	return (0);
-}
+bool		render_run(t_mlx *m);
+
+#endif
