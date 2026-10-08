@@ -15,14 +15,13 @@
 int	main(void)
 {
 	t_vars	v;
-	t_mlx	m;
 
 	v.width = 6;
 	v.height = 5;
 	v.direction = NORTH;
 	v.col = 4;
 	v.row = 3;
-	if (!render_run(&m, &v))
+	if (!render_run(&v))
 		return (1);
 	return (0);
 }

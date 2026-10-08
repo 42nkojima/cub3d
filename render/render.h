@@ -19,12 +19,6 @@
 # define WIN_W 640
 # define WIN_H 480
 
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win;
-}			t_mlx;
-
-bool		render_run(t_mlx *m, const t_vars *v);
+bool		render_run(t_vars *v);
 
 #endif

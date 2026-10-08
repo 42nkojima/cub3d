@@ -32,6 +32,8 @@ typedef struct s_vars
 	int		height;
 	int		col;
 	int		row;
+	void	*mlx;
+	void	*win;
 }			t_vars;
 
 #endif
