@@ -22,11 +22,7 @@ static bool	render_open_window(t_vars *v)
 		return (false);
 	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "cub3D");
 	if (!v->win)
-	{
-		mlx_destroy_display(v->mlx);
-		free(v->mlx);
 		return (false);
-	}
 	return (true);
 }
 

@@ -3,6 +3,8 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
 SRCS        = main.c \
+			  exit/cub_cleaner.c \
+			  exit/cub_error.c \
 			  render/render.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -18,7 +20,7 @@ ifeq ($(UNAME_S),Darwin)
 X11_INC     = -I/opt/X11/include
 X11_FLAGS   = -L/opt/X11/lib
 endif
-INCLUDES    = -I. -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
+INCLUDES    = -I. -Iexit -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
 MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
