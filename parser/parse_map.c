@@ -1,44 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/10 17:00:31 by tmase            ###   ########.fr       */
+/*   Created: 2026/10/04 14:15:51 by tmase             #+#    #+#             */
+/*   Updated: 2026/10/04 16:43:11 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#include <parse.h>
 
-#include "libft.h"
-
-
-typedef enum e_dir
+bool	parse_map(int fd, t_vars *vars)
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
-}			t_dir;
-
-typedef struct s_vars
-{
-	char	*tex_path[4];
-	t_dir	direction;
-	int		ceiling_color;
-	int		floor_color;
-	char	**map;
-	int		width;
-	int		height;
-	int		col;
-	int		row;
-	void	*mlx;
-	void	*win;
-}			t_vars;
-
-#endif
-
 	
+}
