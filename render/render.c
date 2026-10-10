@@ -15,18 +15,14 @@
 #include "render.h"
 #include <stdlib.h>
 
-static bool	render_open_window(t_mlx *m)
+static bool	render_open_window(t_vars *v)
 {
-	m->mlx = mlx_init();
-	if (!m->mlx)
+	v->mlx = mlx_init();
+	if (!v->mlx)
 		return (false);
-	m->win = mlx_new_window(m->mlx, WIN_W, WIN_H, "cub3D");
-	if (!m->win)
-	{
-		mlx_destroy_display(m->mlx);
-		free(m->mlx);
+	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "cub3D");
+	if (!v->win)
 		return (false);
-	}
 	return (true);
 }
 
@@ -41,7 +37,7 @@ static void	render_append_nbr(char *buf, size_t size, int n)
 	free(s);
 }
 
-static void	render_put_info(t_mlx *m, const t_vars *v)
+static void	render_put_info(const t_vars *v)
 {
 	char	buf[64];
 	char	dir[2];
@@ -60,14 +56,14 @@ static void	render_put_info(t_mlx *m, const t_vars *v)
 	ft_strlcat(buf, ",", sizeof(buf));
 	render_append_nbr(buf, sizeof(buf), v->row);
 	ft_strlcat(buf, ")", sizeof(buf));
-	mlx_string_put(m->mlx, m->win, 20, 20, 0xFFFFFF, buf);
+	mlx_string_put(v->mlx, v->win, 20, 20, 0xFFFFFF, buf);
 }
 
-bool	render_run(t_mlx *m, const t_vars *v)
+bool	render_run(t_vars *v)
 {
-	if (!render_open_window(m))
+	if (!render_open_window(v))
 		return (false);
-	render_put_info(m, v);
-	mlx_loop(m->mlx);
+	render_put_info(v);
+	mlx_loop(v->mlx);
 	return (true);
 }

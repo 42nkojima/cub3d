@@ -10,19 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub_error.h"
+#include "libft.h"
 #include "render.h"
 
 int	main(void)
 {
 	t_vars	v;
-	t_mlx	m;
 
+	ft_bzero(&v, sizeof(v));
 	v.width = 6;
 	v.height = 5;
 	v.direction = NORTH;
 	v.col = 4;
 	v.row = 3;
-	if (!render_run(&m, &v))
-		return (1);
+	if (!render_run(&v))
+		handle_error(&v, "failed to open window", NULL);
 	return (0);
 }

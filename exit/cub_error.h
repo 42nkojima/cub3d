@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   cub_error.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:25:00 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 07:11:46 by nkojima          ###   ########.fr       */
+/*   Created: 2026/10/06 20:00:33 by nkojima           #+#    #+#             */
+/*   Updated: 2026/10/06 20:00:33 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef CUB_ERROR_H
+# define CUB_ERROR_H
 
 # include "cub.h"
-# include <stdbool.h>
 
-# define WIN_W 640
-# define WIN_H 480
-
-bool		render_run(t_vars *v);
+void	handle_error(t_vars *v, const char *msg, const char *detail);
 
 #endif
