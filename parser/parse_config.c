@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:05 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/10 17:58:22 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/10 20:18:54 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ bool	is_empty_line(char *line)
 		return (true);
 	return (false);
 }
-
-// void	trim_whitespace(char *str)
-// {
-// 	int	i;
-
-// 	if (!str)
-// 		return ;
-// 	i = ft_strlen(str) - 1;
-// 	while (i >= 0 && (str[i]) == '\n' || str[i] == ' ' || str[i] == '\t')
-// 	{
-// 		str[i] = '\0';
-// 		i--;
-// 	}
-// }
 
 bool	set_color(t_vars *vars, char *line, char c)
 {
@@ -92,7 +78,7 @@ bool	is_all_config_set(t_vars *vars)
 			return (false);
 		i++;
 	}
-	if (!vars->floor_color || !vars->ceiling_color)
+	if (vars->floor_color == -1 || vars->ceiling_color == -1)
 		return (false);
 	return (true);
 }
@@ -116,5 +102,19 @@ bool	parse_config(int fd, t_vars *vars)
 		if (is_all_config_set(vars))
 			break ;
 	}
+	if (!is_all_config_set(vars))
+		return (false);
 	return (true);
+}
+
+void	test_parse(t_vars *vars)
+{
+	int fd = open("maps/good/simple.cub", O_RDONLY);
+	if (parse_config(fd, vars))
+	{
+		printf("%s\n%s\n%s\n%s\nC: %d\nF: %d\n", vars->tex_path[NORTH], vars->tex_path[SOUTH], 
+			vars->tex_path[WEST] ,vars->tex_path[EAST], vars->ceiling_color, vars->floor_color);
+		printf("OK!!!!!!!!");
+	}
+	close(fd);
 }
