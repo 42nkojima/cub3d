@@ -70,6 +70,7 @@ bool	render_run(t_vars *v)
 		return (false);
 	render_frame(v);
 	render_put_info(v);
+	render_set_hooks(v);
 	mlx_loop(v->mlx);
 	return (true);
 }

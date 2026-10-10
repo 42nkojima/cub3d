@@ -61,3 +61,9 @@ void	destroy_vars(t_vars *v)
 	free_map(v);
 	destroy_mlx(v);
 }
+
+void	exit_game(t_vars *v)
+{
+	destroy_vars(v);
+	exit(EXIT_SUCCESS);
+}

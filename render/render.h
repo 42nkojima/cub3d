@@ -22,5 +22,6 @@
 bool	render_run(t_vars *v);
 void	render_frame(t_vars *v);
 void	render_put_pixel(t_img *img, int x, int y, int color);
+void	render_set_hooks(t_vars *v);
 
 #endif
