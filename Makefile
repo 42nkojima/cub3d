@@ -5,7 +5,8 @@ CFLAGS      = -Wall -Wextra -Werror
 SRCS        = main.c \
 			  exit/cub_cleaner.c \
 			  exit/cub_error.c \
-			  render/render.c
+			  render/render.c \
+			  render/render_frame.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
