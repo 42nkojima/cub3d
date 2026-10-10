@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/04 02:17:37 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 17:23:57 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ typedef enum e_dir
 	EAST
 }			t_dir;
 
+typedef struct s_img
+{
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef struct s_vars
 {
 	char	*tex_path[4];
@@ -34,6 +43,7 @@ typedef struct s_vars
 	int		row;
 	void	*mlx;
 	void	*win;
+	t_img	img;
 }			t_vars;
 
 #endif

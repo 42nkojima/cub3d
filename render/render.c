@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:27:30 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 07:11:29 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 17:37:40 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static bool	render_open_window(t_vars *v)
 	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "cub3D");
 	if (!v->win)
 		return (false);
+	v->img.ptr = mlx_new_image(v->mlx, WIN_W, WIN_H);
+	if (!v->img.ptr)
+		return (false);
+	v->img.addr = mlx_get_data_addr(v->img.ptr, &v->img.bpp, &v->img.line_len,
+			&v->img.endian);
 	return (true);
 }
 
