@@ -1,6 +1,16 @@
 name: Norminette Check
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.c'
+      - '**.h'
+      - '.github/workflows/norminette.yml'
+  pull_request:
+    paths:
+      - '**.c'
+      - '**.h'
+      - '.github/workflows/norminette.yml'
 
 env:
   PYTHON_VERSION: '3.10'
