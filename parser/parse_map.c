@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 16:46:46 by tmase            ###   ########.fr       */
+/*   Created: 2026/10/04 14:15:51 by tmase             #+#    #+#             */
+/*   Updated: 2026/10/04 16:43:11 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include <parse.h>
 
-int	main(void)
+bool	parse_map(int fd, t_vars *vars)
 {
-	t_vars	v;
-	t_mlx	m;
-
-	v.width = 6;
-	v.height = 5;
-	v.direction = NORTH;
-	v.col = 4;
-	v.row = 3;
-	if (!render_run(&m, &v))
-		return (1);
-	return (0);
+	
 }

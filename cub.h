@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/04 02:17:37 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/08 22:00:54 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
+
+#include "libft.h"
 
 typedef enum e_dir
 {
@@ -35,3 +37,5 @@ typedef struct s_vars
 }			t_vars;
 
 #endif
+
+	

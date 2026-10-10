@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 16:46:46 by tmase            ###   ########.fr       */
+/*   Created: 2026/10/04 13:27:00 by tmase             #+#    #+#             */
+/*   Updated: 2026/10/04 16:54:07 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-int	main(void)
-{
-	t_vars	v;
-	t_mlx	m;
+#include "cub.h"
+#include <stdbool.h>
+#include <fcntl.h>
 
-	v.width = 6;
-	v.height = 5;
-	v.direction = NORTH;
-	v.col = 4;
-	v.row = 3;
-	if (!render_run(&m, &v))
-		return (1);
-	return (0);
-}
+bool	parse_config(int fd, t_vars *vars);
+bool	parse_map(int fd, t_vars *vars);
+
+#endif
