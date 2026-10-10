@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:27:30 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/04 07:11:29 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 16:18:23 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ bool	render_run(t_vars *v)
 	if (!render_open_window(v))
 		return (false);
 	render_put_info(v);
+	render_set_hooks(v);
 	mlx_loop(v->mlx);
 	return (true);
 }

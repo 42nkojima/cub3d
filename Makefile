@@ -3,9 +3,10 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
 SRCS        = main.c \
-			  exit/cub_cleaner.c \
-			  exit/cub_error.c \
-			  render/render.c
+			  			exit/cub_cleaner.c \
+			  			exit/cub_error.c \
+			  			render/render.c \
+							render/render_hook.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
