@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 17:51:58 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/10 17:54:46 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 18:06:39 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "render.h"
 
 /*
-** Writes color to pixel (x, y) of the image.
-** addr points to the first pixel, and each row is line_len bytes long.
-**   y * line_len   : move to the start of row y
-**                    (use line_len, not WIN_W * 4, since rows may be padded)
-**   x * (bpp / 8)  : move x pixels within the row (bpp is in bits)
-** dst is a char * to count in bytes, so cast it to write all 4 bytes at once.
-** Pixels outside the screen are ignored (walls can overflow when very close).
+** 画像の (x, y) に色を書き込む。
+** addr はピクセルデータの先頭で、1行ぶんのバイト数が line_len。
+**   y * line_len   : y 行目の先頭まで進む
+**                    （行末に余白が入ることがあるので WIN_W * 4 ではなく line_len）
+**   x * (bpp / 8)  : その行の中で x ピクセルぶん進む（bpp はビット数なので 8 で割る）
+** dst はバイト単位で数えるために char * なので、4 バイトまとめて書くときはキャストする。
+** 画面外は書き込まずに無視する（壁に近づいたときのはみ出し対策）。
 */
 void	render_put_pixel(t_img *img, int x, int y, int color)
 {
