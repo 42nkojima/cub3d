@@ -68,6 +68,7 @@ bool	render_run(t_vars *v)
 {
 	if (!render_open_window(v))
 		return (false);
+	render_frame(v);
 	render_put_info(v);
 	mlx_loop(v->mlx);
 	return (true);
