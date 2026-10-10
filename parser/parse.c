@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:44 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/04 16:54:24 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/10 16:57:47 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 	textureならtexとcolorだけ、mapならmapだけみたいな
 	できそう、ほかのところはNULLにするなりなんなり
 	textureではなくconfigという名前に
+	falseが返った場合にはmainでfree_all(vars)みたいにする
 	*/	
 
 bool	parse(char *filepath, t_vars *vars)
@@ -34,5 +35,5 @@ bool	parse(char *filepath, t_vars *vars)
 	fd = open(filepath, O_RDONLY);
 	status = parse_config(fd, vars) && parse_map(fd, vars);
 	close(fd);
-	return (true);
+	return (status);
 }
