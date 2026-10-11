@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 16:18:18 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 16:18:47 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 17:36:03 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ static void	raycast_run_dda(t_ray *r, char **map)
 **             1マスぶん（delta_dist）戻す。
 **             p->dir の長さが 1 なので、どのレイも1歩で前に 1 進む。
 **             だから歩数がそのまま前方向の距離（垂直距離）になる。
+** 壁にぴったりくっつくと perp_dist が 0 に近くなり、壁の高さを求める割り算が
+** 壊れるから、下限を 1e-4 にしておく。
 ** 参考: https://lodev.org/cgtutor/raycasting.html
 */
 void	raycast_cast(t_ray *r, const t_player *p, char **map, int x)
@@ -118,4 +120,6 @@ void	raycast_cast(t_ray *r, const t_player *p, char **map, int x)
 		r->perp_dist = r->side_dist_x - r->delta_dist_x;
 	else
 		r->perp_dist = r->side_dist_y - r->delta_dist_y;
+	if (r->perp_dist < 1e-4)
+		r->perp_dist = 1e-4;
 }

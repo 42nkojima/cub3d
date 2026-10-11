@@ -8,6 +8,7 @@ SRCS        = main.c \
 			  render/render.c \
 			  render/render_frame.c \
 			  render/render_hook.c \
+				render/render_wall.c \
 			  raycast/raycast.c \
 			  raycast/raycast_player.c
 OBJ_DIR     = obj
