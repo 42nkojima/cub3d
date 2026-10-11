@@ -5,12 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 14:15:05 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/11 19:21:47 by tmase            ###   ########.fr       */
+/*   Created: 2026/10/11 20:20:07 by tmase             #+#    #+#             */
+/*   Updated: 2026/10/11 20:20:36 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+bool	is_empty_line(char *line)
+{
+	if (line[0] == '\n')
+		return (true);
+	return (false);
+}
 
 bool	set_color(t_vars *vars, char *line, char c)
 {
