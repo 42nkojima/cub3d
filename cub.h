@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/10 17:23:57 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 22:29:41 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,42 @@ typedef enum e_dir
 	SOUTH,
 	WEST,
 	EAST
-}			t_dir;
+}				t_dir;
 
 typedef struct s_img
 {
-	void	*ptr;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_img;
+	void		*ptr;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_img;
+
+typedef struct s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}				t_player;
 
 typedef struct s_vars
 {
-	char	*tex_path[4];
-	t_dir	direction;
-	int		ceiling_color;
-	int		floor_color;
-	char	**map;
-	int		width;
-	int		height;
-	int		col;
-	int		row;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-}			t_vars;
+	char		*tex_path[4];
+	t_dir		direction;
+	int			ceiling_color;
+	int			floor_color;
+	char		**map;
+	int			width;
+	int			height;
+	int			col;
+	int			row;
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	t_player	player;
+}				t_vars;
 
 #endif

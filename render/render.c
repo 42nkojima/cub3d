@@ -6,12 +6,13 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:27:30 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/10 17:37:40 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 16:21:02 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "mlx.h"
+#include "raycast.h"
 #include "render.h"
 #include <stdlib.h>
 
@@ -68,6 +69,7 @@ bool	render_run(t_vars *v)
 {
 	if (!render_open_window(v))
 		return (false);
+	raycast_init_player(v);
 	render_frame(v);
 	render_put_info(v);
 	render_set_hooks(v);
