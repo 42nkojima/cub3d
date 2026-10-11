@@ -13,8 +13,7 @@
 #ifndef CUB_H
 # define CUB_H
 
-#include "libft.h"
-
+# include "libft.h"
 
 typedef enum e_dir
 {
@@ -50,5 +49,3 @@ typedef struct s_vars
 }			t_vars;
 
 #endif
-
-	

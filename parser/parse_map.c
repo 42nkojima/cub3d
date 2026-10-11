@@ -12,20 +12,12 @@
 
 #include <parse.h>
 
-typedef	struct s_list {
-	char	*line;
-	t_list	*prev;
-	t_list	*next;
-}				t_list;
-
 bool	map_to_list(t_vars *vars, char *line, t_list *list)
 {
-	
 }
 
 bool	convert_list_to_array(t_vars *vars, t_list *list)
 {
-	
 }
 
 bool	parse_map(int fd, t_vars *vars)
@@ -33,19 +25,21 @@ bool	parse_map(int fd, t_vars *vars)
 	char	*line;
 	t_list	*list;
 
-	
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (is_empty_line(line))
 		{
 			free(line);
-			continue;
+			line = get_next_line(fd);
+			continue ;
 		}
 		if (!map_to_list(vars, line, list))
 		{
 			free(line);
 			return (false);
 		}
+		line = get_next_line(fd);
 	}
 	if (!convert_list_to_array(vars, list))
 		return (false);

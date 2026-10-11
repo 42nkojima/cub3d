@@ -12,13 +12,6 @@
 
 #include "parse.h"
 
-bool	is_empty_line(char *line)
-{
-	if (line[0] == '\n')	
-		return (true);
-	return (false);
-}
-
 bool	set_color(t_vars *vars, char *line, char c)
 {
 	char	**rgb;
@@ -49,18 +42,18 @@ bool	set_color(t_vars *vars, char *line, char c)
 
 bool	parse_element_line(char *line, t_vars *vars)
 {
-	if (line[0] == 'N' && line[1] =='O' && !vars->tex_path[NORTH])
+	if (line[0] == 'N' && line[1] == 'O' && !vars->tex_path[NORTH])
 		vars->tex_path[NORTH] = ft_strdup(line + 3);
-	else if (line[0] == 'S' && line[1] =='O' && !vars->tex_path[SOUTH])
+	else if (line[0] == 'S' && line[1] == 'O' && !vars->tex_path[SOUTH])
 		vars->tex_path[SOUTH] = ft_strdup(line + 3);
-	else if (line[0] == 'W' && line[1] =='E' && !vars->tex_path[WEST])
-		vars->tex_path[WEST] = ft_strdup(line + 3);				
-	else if (line[0] == 'E' && line[1] =='A' && !vars->tex_path[EAST])
+	else if (line[0] == 'W' && line[1] == 'E' && !vars->tex_path[WEST])
+		vars->tex_path[WEST] = ft_strdup(line + 3);
+	else if (line[0] == 'E' && line[1] == 'A' && !vars->tex_path[EAST])
 		vars->tex_path[EAST] = ft_strdup(line + 3);
 	else if (line[0] == 'F' && vars->floor_color == -1)
-		return(set_color(vars, line + 2, 'f'));
+		return (set_color(vars, line + 2, 'f'));
 	else if (line[0] == 'C' && vars->ceiling_color == -1)
-		return(set_color(vars, line + 2, 'c'));
+		return (set_color(vars, line + 2, 'c'));
 	else
 		return (false);
 	return (true);
@@ -85,12 +78,15 @@ bool	is_all_config_set(t_vars *vars)
 bool	parse_config(int fd, t_vars *vars)
 {
 	char	*line;
-	while ((line = get_next_line(fd)) != NULL)
+
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (is_empty_line(line))
 		{
 			free(line);
-			continue;
+			line = get_next_line(fd);
+			continue ;
 		}
 		if (!parse_element_line(line, vars))
 		{
@@ -100,6 +96,7 @@ bool	parse_config(int fd, t_vars *vars)
 		free(line);
 		if (is_all_config_set(vars))
 			break ;
+		line = get_next_line(fd);
 	}
 	if (!is_all_config_set(vars))
 		return (false);
@@ -108,11 +105,14 @@ bool	parse_config(int fd, t_vars *vars)
 
 void	test_parse(t_vars *vars)
 {
-	int fd = open("maps/good/simple.cub", O_RDONLY);
+	int	fd;
+
+	fd = open("maps/good/simple.cub", O_RDONLY);
 	if (parse_config(fd, vars))
 	{
-		printf("%s\n%s\n%s\n%s\nC: %d\nF: %d\n", vars->tex_path[NORTH], vars->tex_path[SOUTH], 
-			vars->tex_path[WEST] ,vars->tex_path[EAST], vars->ceiling_color, vars->floor_color);
+		printf("%s\n%s\n%s\n%s\n", vars->tex_path[NORTH],
+			vars->tex_path[SOUTH], vars->tex_path[WEST], vars->tex_path[EAST]);
+		printf("C: %d\nF: %d\n", vars->ceiling_color, vars->floor_color);
 		printf("OK!!!!!!!!");
 	}
 	close(fd);
