@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:05 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/10 20:18:54 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/11 19:21:47 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ bool	set_color(t_vars *vars, char *line, char c)
 	return (true);
 }
 
-//加工済みの文字列を受け取る(末尾の改行、先頭のスペース、間の余分なスペース削除済み)
 bool	parse_element_line(char *line, t_vars *vars)
 {
 	if (line[0] == 'N' && line[1] =='O' && !vars->tex_path[NORTH])
