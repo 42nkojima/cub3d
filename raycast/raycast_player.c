@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 16:24:38 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 18:25:04 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 19:05:12 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,23 @@ void	raycast_rotate(t_player *p, double angle)
 {
 	raycast_rotate_vec(&p->dir_x, &p->dir_y, angle);
 	raycast_rotate_vec(&p->plane_x, &p->plane_y, angle);
+}
+
+/*
+** プレイヤーを (dx, dy) の向きに MOVE_SPEED だけ動かす。動いた先が壁のマスなら動かない。
+** 壁のマスに入ると DDA のスタート地点が壁になって描画が壊れ、マップの外に出ると落ちてしまうため。
+** x と y を別々にチェックするから、斜めに壁にぶつかっても壁に沿って滑れる。
+** マップが壁で閉じていることはパーサーが保証するので、'1' かどうかだけ見ればいい。
+*/
+void	raycast_move(t_player *p, char **map, double dx, double dy)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = p->pos_x + dx * MOVE_SPEED;
+	new_y = p->pos_y + dy * MOVE_SPEED;
+	if (map[(int)p->pos_y][(int)new_x] != '1')
+		p->pos_x = new_x;
+	if (map[(int)new_y][(int)p->pos_x] != '1')
+		p->pos_y = new_y;
 }
