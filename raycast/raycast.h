@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 16:24:41 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 16:24:41 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 17:59:04 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define RAYCAST_H
 
 # include "cub.h"
+
+# define PLANE_LEN 0.66
 
 // 描画側 (render) は使うだけで中身は知らなくていいから、 cub.h じゃなくてこっちに置く
 typedef struct s_ray
