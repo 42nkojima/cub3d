@@ -6,11 +6,12 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 16:24:38 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 17:59:09 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 18:25:04 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
+#include <math.h>
 
 /*
 ** マップの N・S・W・E に合わせて、プレイヤーの位置と向きを決める。
@@ -30,4 +31,29 @@ void	raycast_init_player(t_vars *v)
 	v->player.dir_y = dirs[v->direction][1];
 	v->player.plane_x = -v->player.dir_y * PLANE_LEN;
 	v->player.plane_y = v->player.dir_x * PLANE_LEN;
+}
+
+/*
+** ベクトル (x, y) を angle (ラジアン) だけ回す。
+** 回転の公式を使う。 https://mathlandscape.com/rotation-matrix/
+** x を先に書き換えると y の計算で新しい x を使ってしまうから、元の x は取っておく。
+** y は下に行くほど大きいから、angle が正だと見た目は右回りになる。
+*/
+static void	raycast_rotate_vec(double *x, double *y, double angle)
+{
+	double	old_x;
+
+	old_x = *x;
+	*x = old_x * cos(angle) - *y * sin(angle);
+	*y = old_x * sin(angle) + *y * cos(angle);
+}
+
+/*
+** プレイヤーの向きを angle だけ回す。
+** dir と plane を同じ角度だけ回すから、長さも直角の関係も変わらず、画面が歪まない。
+*/
+void	raycast_rotate(t_player *p, double angle)
+{
+	raycast_rotate_vec(&p->dir_x, &p->dir_y, angle);
+	raycast_rotate_vec(&p->plane_x, &p->plane_y, angle);
 }
