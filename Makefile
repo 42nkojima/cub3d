@@ -22,7 +22,7 @@ ifeq ($(UNAME_S),Darwin)
 X11_INC     = -I/opt/X11/include
 X11_FLAGS   = -L/opt/X11/lib
 endif
-INCLUDES    = -I. -Iexit -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC) -Iparser
+INCLUDES    = -I. -Iexit -Iparser -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
 MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
