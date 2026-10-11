@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 12:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 18:20:42 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 19:04:46 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static int	render_on_key(int keysym, t_vars *v)
 		raycast_rotate(&v->player, -ROT_SPEED);
 	else if (keysym == XK_Right)
 		raycast_rotate(&v->player, ROT_SPEED);
+	else if (keysym == XK_w)
+		raycast_move(&v->player, v->map, v->player.dir_x, v->player.dir_y);
+	else if (keysym == XK_s)
+		raycast_move(&v->player, v->map, -v->player.dir_x, -v->player.dir_y);
+	else if (keysym == XK_d)
+		raycast_move(&v->player, v->map, -v->player.dir_y, v->player.dir_x);
+	else if (keysym == XK_a)
+		raycast_move(&v->player, v->map, v->player.dir_y, -v->player.dir_x);
 	else
 		return (0);
 	render_frame(v);
