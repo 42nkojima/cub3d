@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 20:00:33 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/06 20:00:33 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/10 17:46:48 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ static void	destroy_mlx(t_vars *v)
 {
 	if (!v->mlx)
 		return ;
+	if (v->img.ptr)
+		mlx_destroy_image(v->mlx, v->img.ptr);
 	if (v->win)
 		mlx_destroy_window(v->mlx, v->win);
 	mlx_destroy_display(v->mlx);
 	free(v->mlx);
+	v->img.ptr = NULL;
 	v->win = NULL;
 	v->mlx = NULL;
 }
@@ -57,4 +60,10 @@ void	destroy_vars(t_vars *v)
 	free_tex_paths(v);
 	free_map(v);
 	destroy_mlx(v);
+}
+
+void	exit_game(t_vars *v)
+{
+	destroy_vars(v);
+	exit(EXIT_SUCCESS);
 }

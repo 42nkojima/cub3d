@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/10 17:00:31 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/11 19:26:06 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ typedef enum e_dir
 	EAST
 }			t_dir;
 
+typedef struct s_img
+{
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef struct s_vars
 {
 	char	*tex_path[4];
@@ -37,6 +46,7 @@ typedef struct s_vars
 	int		row;
 	void	*mlx;
 	void	*win;
+	t_img	img;
 }			t_vars;
 
 #endif
