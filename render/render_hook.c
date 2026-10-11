@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 12:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 19:04:46 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 19:23:48 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 static int	render_on_close(t_vars *v)
 {
 	exit_game(v);
+	return (0);
+}
+
+/*
+** ウィンドウが隠れたあと見えるようになったとき (Expose) に、画像を貼り直す。
+** 画像バッファには最後に描いた描画が残っているから、計算し直す必要はない。
+*/
+static int	render_on_expose(t_vars *v)
+{
+	mlx_put_image_to_window(v->mlx, v->win, v->img.ptr, 0, 0);
 	return (0);
 }
 
@@ -49,4 +59,5 @@ void	render_set_hooks(t_vars *v)
 {
 	mlx_hook(v->win, KeyPress, KeyPressMask, render_on_key, v);
 	mlx_hook(v->win, DestroyNotify, StructureNotifyMask, render_on_close, v);
+	mlx_hook(v->win, Expose, ExposureMask, render_on_expose, v);
 }
