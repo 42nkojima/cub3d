@@ -13,6 +13,9 @@
 #ifndef CUB_H
 # define CUB_H
 
+# define WIN_W 640
+# define WIN_H 480
+
 typedef enum e_dir
 {
 	NORTH,
