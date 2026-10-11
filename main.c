@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/10 17:45:57 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 19:25:26 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_error.h"
 #include "libft.h"
 #include "render.h"
+#include "parse.h"
 
 int	main(void)
 {
 	t_vars	v;
 
 	ft_bzero(&v, sizeof(v));
+	v.ceiling_color = -1;
+	v.floor_color = -1;
 	v.width = 6;
 	v.height = 5;
 	v.direction = NORTH;
