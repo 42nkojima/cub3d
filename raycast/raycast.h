@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 16:24:41 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 18:13:14 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 18:53:32 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define PLANE_LEN 0.66
 # define ROT_SPEED 0.05
+# define MOVE_SPEED 0.1
 
 // 描画側 (render) は使うだけで中身は知らなくていいから、 cub.h じゃなくてこっちに置く
 typedef struct s_ray
@@ -38,5 +39,6 @@ typedef struct s_ray
 void		raycast_init_player(t_vars *v);
 void		raycast_rotate(t_player *p, double angle);
 void		raycast_cast(t_ray *r, const t_player *p, char **map, int x);
+void		raycast_move(t_player *p, char **map, double dx, double dy);
 
 #endif
