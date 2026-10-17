@@ -6,18 +6,11 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:20:07 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/11 20:20:36 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 15:50:36 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-bool	is_empty_line(char *line)
-{
-	if (line[0] == '\n')
-		return (true);
-	return (false);
-}
 
 bool	set_color(t_vars *vars, char *line, char c)
 {
@@ -108,19 +101,4 @@ bool	parse_config(int fd, t_vars *vars)
 	if (!is_all_config_set(vars))
 		return (false);
 	return (true);
-}
-
-void	test_parse(t_vars *vars)
-{
-	int	fd;
-
-	fd = open("maps/good/simple.cub", O_RDONLY);
-	if (parse_config(fd, vars))
-	{
-		printf("%s\n%s\n%s\n%s\n", vars->tex_path[NORTH],
-			vars->tex_path[SOUTH], vars->tex_path[WEST], vars->tex_path[EAST]);
-		printf("C: %d\nF: %d\n", vars->ceiling_color, vars->floor_color);
-		printf("OK!!!!!!!!");
-	}
-	close(fd);
 }

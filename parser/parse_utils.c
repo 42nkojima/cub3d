@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 19:45:08 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/11 19:45:08 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 15:49:45 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,39 @@ bool	is_empty_line(char *line)
 	if (line[0] == '\n')
 		return (true);
 	return (false);
+}
+
+t_list	*ft_lstnew(char *content)
+{
+	t_list	*new_node;
+
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	clear_all_list(t_list *list)
+{
+	t_list	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		if (list->content)
+			free(list->content);
+		free(list);
+		list = tmp;
+	}
 }

@@ -7,7 +7,11 @@ SRCS        = main.c \
 			  exit/cub_error.c \
 			  render/render.c \
 			  render/render_frame.c \
-			  render/render_hook.c
+			  render/render_hook.c \
+			  parser/parse.c \
+			  parser/parse_config.c \
+			  parser/parse_map.c \
+			  parser/parse_utils.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
