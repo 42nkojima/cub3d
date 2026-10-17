@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 19:59:23 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 20:13:28 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 static int	line_to_direction(char c)
 {
-	if (c = 'N')
+	if (c == 'N')
 		return (NORTH);
-	else if (c = 'S')
+	else if (c == 'S')
 		return (SOUTH);
-	else if (c = 'E')
+	else if (c == 'E')
 		return (EAST);
 	else
 		return (WEST);
 }
-
 
 static bool	check_line(t_vars *vars, char *line)
 {
