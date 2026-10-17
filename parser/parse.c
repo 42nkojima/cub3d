@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:44 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 17:12:05 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 17:24:15 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ bool	parse(int ac, char **av, t_vars *vars)
 	if (parse_config(fd, vars) && parse_map(fd, vars))
 	{
 		clean_all_newlines(vars);
-		test_parse(vars);
 		close(fd);
 		return (true);
 	}
