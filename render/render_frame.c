@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/10 17:51:58 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/10 18:06:39 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/11 17:46:24 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ static void	render_draw_background(t_vars *v)
 void	render_frame(t_vars *v)
 {
 	render_draw_background(v);
+	render_draw_walls(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->img.ptr, 0, 0);
 }

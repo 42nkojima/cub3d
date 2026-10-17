@@ -12,6 +12,9 @@ SRCS        = main.c \
 			  parser/parse_config.c \
 			  parser/parse_map.c \
 			  parser/parse_utils.c
+				render/render_wall.c \
+			  raycast/raycast.c \
+			  raycast/raycast_player.c
 OBJ_DIR     = obj
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
@@ -26,7 +29,7 @@ ifeq ($(UNAME_S),Darwin)
 X11_INC     = -I/opt/X11/include
 X11_FLAGS   = -L/opt/X11/lib
 endif
-INCLUDES    = -I. -Iexit -Iparser -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
+INCLUDES    = -I. -Iexit -Iparser -Iraycast -Irender -I$(LIBFT_DIR) -I$(MLX_DIR) $(X11_INC)
 MLX_FLAGS   = -L$(MLX_DIR) -lmlx $(X11_FLAGS) -lXext -lX11 -lm
 
 all: $(NAME)
