@@ -11,7 +11,7 @@ SRCS        = main.c \
 			  parser/parse.c \
 			  parser/parse_config.c \
 			  parser/parse_map.c \
-			  parser/parse_utils.c
+			  parser/parse_utils.c \
 				render/render_wall.c \
 			  raycast/raycast.c \
 			  raycast/raycast_player.c
