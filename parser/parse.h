@@ -6,7 +6,11 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 13:27:00 by tmase             #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2026/10/17 15:50:51 by tmase            ###   ########.fr       */
+=======
+/*   Updated: 2026/10/17 19:55:41 by tmase            ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +35,6 @@ bool	is_empty_line(char *line);
 t_list	*ft_lstnew(char *content);
 t_list	*ft_lstlast(t_list *lst);
 void	clear_all_list(t_list *list);
+bool	line_to_list(char *line, t_list **list);
 
 #endif
