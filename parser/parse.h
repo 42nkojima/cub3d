@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 13:27:00 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 17:09:53 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 20:24:42 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ bool	is_empty_line(char *line);
 t_list	*ft_lstnew(char *content);
 t_list	*ft_lstlast(t_list *lst);
 void	clear_all_list(t_list *list);
+bool	line_to_list(char *line, t_list **list);
 
 #endif

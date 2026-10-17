@@ -6,28 +6,22 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 15:53:49 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 20:13:28 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parse.h>
 
-static bool	line_to_list(char *line, t_list **list)
+static int	line_to_direction(char c)
 {
-	t_list	*new_node;
-	t_list	*last;
-
-	new_node = ft_lstnew(line);
-	if (!new_node)
-		return (false);
-	if (*list == NULL)
-		*list = new_node;
+	if (c == 'N')
+		return (NORTH);
+	else if (c == 'S')
+		return (SOUTH);
+	else if (c == 'E')
+		return (EAST);
 	else
-	{
-		last = ft_lstlast(*list);
-		last->next = new_node;
-	}
-	return (true);
+		return (WEST);
 }
 
 static bool	check_line(t_vars *vars, char *line)
@@ -37,6 +31,10 @@ static bool	check_line(t_vars *vars, char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
+		if (line[i] != '0' && line[i] != '1' && line[i] != ' '
+			&& line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'W')
+			return (false);
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
 		{
@@ -44,7 +42,7 @@ static bool	check_line(t_vars *vars, char *line)
 				return (false);
 			vars->col = vars->height;
 			vars->row = i;
-			vars->direction = line[i];
+			vars->direction = line_to_direction(line[i]);
 		}
 		i++;
 	}
