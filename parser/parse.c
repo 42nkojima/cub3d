@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:44 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 15:50:43 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/17 17:12:05 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,45 +47,37 @@ void	clean_all_newlines(t_vars *vars)
 	}
 }
 
-void	print_map_debug(t_vars *vars)
+bool	check_args(int ac, char **av)
 {
-	int	i;
+	size_t	len;
 
-	if (!vars || !vars->map)
-	{
-		printf("[DEBUG] Map is NULL\n");
-		return ;
-	}
-	printf("=== MAP DEBUG INFO ===\n");
-	printf("Height   : %d\n", vars->height);
-	printf("Width    : %d\n", vars->width);
-	printf("Player   : %c at (col/y: %d, row/x: %d)\n",
-		vars->direction, vars->col, vars->row);
-	printf("----------------------\n");
-	i = 0;
-	while (vars->map[i])
-	{
-		printf("[%02d] \"%s\"\n", i, vars->map[i]);
-		i++;
-	}
-	printf("======================\n");
+	if (ac != 2)
+		return (false);
+	if (!av[1])
+		return (false);
+	len = ft_strlen(av[1]);
+	if (len < 4 || ft_strncmp(av[1] + len - 4, ".cub", 4) != 0)
+		return (false);
+	return (true);
 }
 
-void	test_parse(t_vars *vars)
+void	setup_vars(t_vars *vars)
 {
-	printf("%s\n%s\n%s\n%s\n", vars->tex_path[NORTH],
-		vars->tex_path[SOUTH], vars->tex_path[WEST], vars->tex_path[EAST]);
-	printf("C: %d\nF: %d\n", vars->ceiling_color, vars->floor_color);
-	printf("OK!!!!!!!!");
-	printf("\n======================\n");
-	print_map_debug(vars);
+	ft_bzero(vars, sizeof(*vars));
+	vars->ceiling_color = -1;
+	vars->floor_color = -1;
 }
 
-bool	parse(char *filepath, t_vars *vars)
+bool	parse(int ac, char **av, t_vars *vars)
 {
 	int	fd;
 
-	fd = open(filepath, O_RDONLY);
+	if (!check_args(ac, av))
+		return (false);
+	setup_vars(vars);
+	fd = open(av[1], O_RDONLY);
+	if (!fd)
+		return (false);
 	if (parse_config(fd, vars) && parse_map(fd, vars))
 	{
 		clean_all_newlines(vars);
