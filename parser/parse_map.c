@@ -40,8 +40,8 @@ static bool	check_line(t_vars *vars, char *line)
 		{
 			if (vars->direction)
 				return (false);
-			vars->col = vars->height;
-			vars->row = i;
+			vars->row = vars->height;
+			vars->col = i;
 			vars->direction = line_to_direction(line[i]);
 		}
 		i++;
