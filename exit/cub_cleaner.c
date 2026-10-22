@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 20:00:33 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/10 17:46:48 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/23 06:43:44 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,18 @@ static void	free_map(t_vars *v)
 
 static void	destroy_mlx(t_vars *v)
 {
+	int	i;
+
+	i = 0;
 	if (!v->mlx)
 		return ;
+	while (i < 4)
+	{
+		if (v->tex[i].ptr)
+			mlx_destroy_image(v->mlx, v->tex[i].ptr);
+		v->tex[i].ptr = NULL;
+		i++;
+	}
 	if (v->img.ptr)
 		mlx_destroy_image(v->mlx, v->img.ptr);
 	if (v->win)

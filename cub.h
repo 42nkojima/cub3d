@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 17:35:10 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/11 20:21:07 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/23 06:37:32 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_img
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			w;
+	int			h;
 }				t_img;
 
 typedef struct s_player
@@ -59,6 +61,7 @@ typedef struct s_vars
 	void		*mlx;
 	void		*win;
 	t_img		img;
+	t_img		tex[4];
 	t_player	player;
 }				t_vars;
 
