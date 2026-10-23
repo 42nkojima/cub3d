@@ -48,32 +48,6 @@ static bool	check_line(t_vars *vars, char *line)
 	return (true);
 }
 
-static bool	convert_list_to_array(t_vars *vars, t_list *list)
-{
-	t_list	*cur;
-	int		i;
-
-	if (!list)
-		return (false);
-	vars->map = malloc(sizeof(char *) * (vars->height + 1));
-	if (!vars->map)
-		return (false);
-	cur = list;
-	i = 0;
-	while (cur)
-	{
-		if ((int)ft_strlen(cur->content) > vars->width)
-			vars->width = ft_strlen(cur->content);
-		vars->map[i] = ft_strdup(cur->content);
-		if (!vars->map[i])
-			return (false);
-		cur = cur->next;
-		i++;
-	}
-	vars->map[i] = NULL;
-	return (true);
-}
-
 static bool	process_line(t_vars *vars, t_list **list, char *line)
 {
 	if (is_empty_line(line))
