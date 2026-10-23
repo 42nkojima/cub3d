@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/23 08:54:13 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/23 09:20:43 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ bool	parse_map(int fd, t_vars *vars)
 		}
 		line = get_next_line(fd);
 	}
-	if (vars->col == -1 || !convert_list_to_array(vars, list))
+	if (vars->col == -1 || !convert_list_to_array(vars, list)
+		|| !is_map_closed(vars))
 	{
 		clear_all_list(list);
 		return (false);
