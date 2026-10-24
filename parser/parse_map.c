@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 20:13:28 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/23 08:54:13 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "parse.h"
 
 static int	line_to_direction(char c)
 {
@@ -31,12 +31,11 @@ static bool	check_line(t_vars *vars, char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != ' '
-			&& line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'E' && line[i] != 'W')
+		if (line[i] != '0' && line[i] != '1' && line[i] != ' ' && line[i] != 'N'
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 			return (false);
-		if (line[i] == 'N' || line[i] == 'S'
-			|| line[i] == 'E' || line[i] == 'W')
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
 		{
 			if (vars->col != -1)
 				return (false);
@@ -46,32 +45,6 @@ static bool	check_line(t_vars *vars, char *line)
 		}
 		i++;
 	}
-	return (true);
-}
-
-static bool	convert_list_to_array(t_vars *vars, t_list *list)
-{
-	t_list	*cur;
-	int		i;
-
-	if (!list)
-		return (false);
-	vars->map = malloc(sizeof(char *) * (vars->height + 1));
-	if (!vars->map)
-		return (false);
-	cur = list;
-	i = 0;
-	while (cur)
-	{
-		if ((int)ft_strlen(cur->content) > vars->width)
-			vars->width = ft_strlen(cur->content);
-		vars->map[i] = ft_strdup(cur->content);
-		if (!vars->map[i])
-			return (false);
-		cur = cur->next;
-		i++;
-	}
-	vars->map[i] = NULL;
 	return (true);
 }
 
