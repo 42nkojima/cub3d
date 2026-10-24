@@ -66,6 +66,7 @@ void	setup_vars(t_vars *vars)
 	ft_bzero(vars, sizeof(*vars));
 	vars->ceiling_color = -1;
 	vars->floor_color = -1;
+	vars->col = -1;
 }
 
 bool	parse(int ac, char **av, t_vars *vars)

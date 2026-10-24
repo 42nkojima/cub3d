@@ -38,10 +38,10 @@ static bool	check_line(t_vars *vars, char *line)
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
 		{
-			if (vars->direction)
+			if (vars->col != -1)
 				return (false);
-			vars->col = vars->height;
-			vars->row = i;
+			vars->row = vars->height;
+			vars->col = i;
 			vars->direction = line_to_direction(line[i]);
 		}
 		i++;
@@ -108,7 +108,7 @@ bool	parse_map(int fd, t_vars *vars)
 		}
 		line = get_next_line(fd);
 	}
-	if (!vars->direction || !convert_list_to_array(vars, list))
+	if (vars->col == -1 || !convert_list_to_array(vars, list))
 	{
 		clear_all_list(list);
 		return (false);
