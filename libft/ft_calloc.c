@@ -52,7 +52,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 // 	n = 5;
 // 	p1 = calloc(n, 1);
 // 	p2 = ft_calloc(n, 1);
-// 	/* メモリ内容を比較。ゼロ初期化なら memcmp == 0 */
+// 	/* compare memory: memcmp == 0 if zeroed */
 // 	printf("%s\n", memcmp(p1, p2, n) == 0 ? "same" : "different");
 // 	free(p1);
 // 	free(p2);

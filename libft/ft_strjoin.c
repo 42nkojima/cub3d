@@ -48,27 +48,27 @@ char	*ft_strjoin(char const *s1, char const *s2)
 // {
 // 	char	*result;
 
-// 	// テストケース 1: 通常の文字列結合
+// 	// Test case 1: normal concatenation
 // 	result = ft_strjoin("Hello, ", "world!");
-// 	printf("Test 1: %s\n", result); // 期待値: "Hello, world!"
+// 	printf("Test 1: %s\n", result); // expected: "Hello, world!"
 // 	free(result);
-// 	// テストケース 2: 空文字列と結合
+// 	// Test case 2: join with an empty string
 // 	result = ft_strjoin("", "world!");
-// 	printf("Test 2: %s\n", result); // 期待値: "world!"
+// 	printf("Test 2: %s\n", result); // expected: "world!"
 // 	free(result);
 // 	result = ft_strjoin("Hello, ", "");
-// 	printf("Test 3: %s\n", result); // 期待値: "Hello, "
+// 	printf("Test 3: %s\n", result); // expected: "Hello, "
 // 	free(result);
-// 	// テストケース 4: 両方が空文字列
+// 	// Test case 4: both are empty
 // 	result = ft_strjoin("", "");
-// 	printf("Test 4: %s\n", result); // 期待値: ""
+// 	printf("Test 4: %s\n", result); // expected: ""
 // 	free(result);
-// 	// テストケース 5: NULL ポインタを渡す
+// 	// Test case 5: pass a NULL pointer
 // 	result = ft_strjoin(NULL, "world!");
-// 	printf("Test 5: %s\n", result); // 期待値: 未定義動作（Cの設計思想に基づく）
+// 	printf("Test 5: %s\n", result); // expected: undefined behavior (as in libc)
 // 	free(result);
 // 	result = ft_strjoin("Hello, ", NULL);
-// 	printf("Test 6: %s\n", result); // 期待値: 未定義動作（Cの設計思想に基づく）
+// 	printf("Test 6: %s\n", result); // expected: undefined behavior (as in libc)
 // 	free(result);
 // 	return (0);
 // }
