@@ -3,4 +3,3 @@ cub3D
 *.o
 minilibx-linux
 en.subject.pdf
-parser/parse_test.c
