@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:17:05 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/17 17:09:16 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/25 14:53:35 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	main(int ac, char **av)
 {
 	t_vars	v;
 
-	if (!parse(ac, av, &v))
-		return (1);
+	parse(ac, av, &v);
 	if (!render_run(&v))
 		handle_error(&v, "failed to open window", NULL);
 	return (0);
