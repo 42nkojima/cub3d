@@ -12,23 +12,39 @@
 
 #include "parse.h"
 
+/*
+** line が「id → スペース1つ以上 → 値」の形なら、値の先頭を返す。違えば NULL。
+**   OK : "NO ./a.xpm"   "NO     ./a.xpm"
+**   NG : "NOX ./a.xpm"  "NO./a.xpm"  "NO<タブ>./a.xpm"  "NO"
+** ft_strncmp は line が短くても \0 で止まるので、文字列の外は読まない。
+*/
+static char	*get_value(char *line, char *id)
+{
+	size_t	len;
+
+	len = ft_strlen(id);
+	if (ft_strncmp(line, id, len) != 0 || line[len] != ' ')
+		return (NULL);
+	while (line[len] == ' ')
+		len++;
+	return (line + len);
+}
+
 bool	parse_element_line(char *line, t_vars *vars)
 {
-	if (line[0] == 'N' && line[1] == 'O' && !vars->tex_path[NORTH])
-		vars->tex_path[NORTH] = ft_strdup(line + 3);
-	else if (line[0] == 'S' && line[1] == 'O' && !vars->tex_path[SOUTH])
-		vars->tex_path[SOUTH] = ft_strdup(line + 3);
-	else if (line[0] == 'W' && line[1] == 'E' && !vars->tex_path[WEST])
-		vars->tex_path[WEST] = ft_strdup(line + 3);
-	else if (line[0] == 'E' && line[1] == 'A' && !vars->tex_path[EAST])
-		vars->tex_path[EAST] = ft_strdup(line + 3);
-	else if (line[0] == 'F' && vars->floor_color == -1)
-		return (set_color(vars, line + 2, 'f'));
-	else if (line[0] == 'C' && vars->ceiling_color == -1)
-		return (set_color(vars, line + 2, 'c'));
-	else
-		return (false);
-	return (true);
+	if (get_value(line, "NO") && !vars->tex_path[NORTH])
+		return (set_texture(vars, NORTH, get_value(line, "NO")));
+	else if (get_value(line, "SO") && !vars->tex_path[SOUTH])
+		return (set_texture(vars, SOUTH, get_value(line, "SO")));
+	else if (get_value(line, "WE") && !vars->tex_path[WEST])
+		return (set_texture(vars, WEST, get_value(line, "WE")));
+	else if (get_value(line, "EA") && !vars->tex_path[EAST])
+		return (set_texture(vars, EAST, get_value(line, "EA")));
+	else if (get_value(line, "F") && vars->floor_color == -1)
+		return (set_color(vars, get_value(line, "F"), 'f'));
+	else if (get_value(line, "C") && vars->ceiling_color == -1)
+		return (set_color(vars, get_value(line, "C"), 'c'));
+	return (false);
 }
 
 bool	is_all_config_set(t_vars *vars)

@@ -58,8 +58,6 @@ bool	set_color(t_vars *vars, char *line, char c)
 	char	**rgb;
 	int		color;
 
-	while (*line == ' ')
-		line++;
 	rgb = ft_split(line, ',');
 	if (!rgb)
 		return (false);
