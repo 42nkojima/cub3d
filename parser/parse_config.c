@@ -13,10 +13,11 @@
 #include "parse.h"
 
 /*
-** line が「id → スペース1つ以上 → 値」の形なら、値の先頭を返す。違えば NULL。
+** Returns the start of the value if line is "id, spaces, value",
+** or NULL otherwise.
 **   OK : "NO ./a.xpm"   "NO     ./a.xpm"
-**   NG : "NOX ./a.xpm"  "NO./a.xpm"  "NO<タブ>./a.xpm"  "NO"
-** ft_strncmp は line が短くても \0 で止まるので、文字列の外は読まない。
+**   NG : "NOX ./a.xpm"  "NO./a.xpm"  "NO<tab>./a.xpm"  "NO"
+** ft_strncmp stops at \0 even if line is short, so it never reads past it.
 */
 static char	*get_value(char *line, char *id)
 {

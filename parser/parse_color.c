@@ -23,9 +23,9 @@ static void	free_split(char **strs)
 }
 
 /*
-** 「1〜3 桁の数字」のあとに、行の終わりか文字列の終わりが来るものだけ OK。
-** スペース、先頭の 0（007 など）、+ や - はエラー。
-** 3桁までにしてるのは、ft_atoi で int があふれないようにするため。
+** OK only for 1 to 3 digits followed by the end of the line or string.
+** Spaces, leading zeros (such as 007), + and - are errors.
+** At most 3 digits so that ft_atoi cannot overflow an int.
 */
 static bool	is_color_value(char *s)
 {

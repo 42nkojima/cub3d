@@ -14,13 +14,13 @@
 #include "render.h"
 
 /*
-** 画像の (x, y) に色を書き込む。
-** addr はピクセルデータの先頭で、1行ぶんのバイト数が line_len。
-**   y * line_len   : y 行目の先頭まで進む
-**                    （行末に余白が入ることがあるので WIN_W * 4 ではなく line_len）
-**   x * (bpp / 8)  : その行の中で x ピクセルぶん進む（bpp はビット数なので 8 で割る）
-** dst はバイト単位で数えるために char * なので、4 バイトまとめて書くときはキャストする。
-** 画面外は書き込まずに無視する（壁に近づいたときのはみ出し対策）。
+** Writes color at (x, y) of the image.
+** addr is the start of the pixel data, and one row is line_len bytes.
+**   y * line_len   : moves to the start of row y
+**                    (line_len, not WIN_W * 4, as rows may be padded)
+**   x * (bpp / 8)  : moves x pixels in the row (bpp is in bits)
+** dst is a char * to count in bytes, so it is cast to write 4 bytes.
+** Pixels off the screen are ignored (walls overflow when close).
 */
 void	render_put_pixel(t_img *img, int x, int y, int color)
 {

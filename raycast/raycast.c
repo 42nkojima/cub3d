@@ -14,17 +14,17 @@
 #include <math.h>
 
 /*
-** x 列目のレイの向きと、スタート地点を決める。
-** camera_x   : 画面の列を -1（左端）〜 +1（右端）に直したもの。
-**              x は 0 〜 WIN_W - 1 なので、2 * x / WIN_W で 0 〜 2 にしてから 1 を引く。
-** r->dir     : レイの向き。プレイヤーの向き p->dir（目から画面の真ん中まで）に、
-**              p->plane（画面の真ん中から右端まで）を camera_x 倍して足す。
-**              左端は dir - plane、真ん中は dir、右端は dir + plane になる。
-** map        : スタートのマス。pos の小数を切り捨てたもの。
-** delta_dist : 縦線（横線）から次の縦線（横線）まで何歩かかるか。
-**              「1歩」はレイを r->dir 1つぶん進めること（レイ上の点 = pos + 歩数 * r->dir）。
-**              1歩で x 方向に |dir_x| マス進むので、1マスぶんは 1 / |dir_x| 歩。
-**              dir_x が 0 だと縦線には届かないので、とても大きい値（1e30）にしておく。
+** Sets the direction and the start cell of the ray for column x.
+** camera_x   : column x mapped to -1 (left edge) .. +1 (right edge).
+**              x is 0 .. WIN_W - 1, so 2 * x / WIN_W gives 0 .. 2, minus 1.
+** r->dir     : ray direction: p->dir (from the eye to the screen center)
+**              plus p->plane (from the center to the right edge) * camera_x.
+**              Left edge: dir - plane, center: dir, right edge: dir + plane.
+** map        : the start cell, pos without its fractional part.
+** delta_dist : steps from one vertical (horizontal) line to the next.
+**              One step moves the ray by r->dir (point = pos + steps * dir).
+**              One step moves |dir_x| cells in x, so a cell is 1 / |dir_x|.
+**              If dir_x is 0, no vertical line is ever hit, so it is 1e30.
 */
 static void	raycast_init_ray(t_ray *r, const t_player *p, int x)
 {
@@ -44,13 +44,14 @@ static void	raycast_init_ray(t_ray *r, const t_player *p, int x)
 }
 
 /*
-** DDA を始める前に、x と y それぞれの進む向きと、最初の線までの歩数を決める。
-** step      : マスを進む向き。dir が正なら +1、負なら -1。
-** side_dist : スタートから最初の縦線（横線）まで何歩か。
-**             マス map は map 〜 map + 1 の範囲なので、左（上）の線は map、右（下）の線は map + 1。
-**             右（下）に進むなら、右（下）の線まで (map + 1 - pos) マス。
-**             左（上）に進むなら、左（上）の線まで (pos - map) マス。
-**             このマス数に、1マスぶんの歩数 delta_dist をかけて歩数にする。
+** Before the DDA, sets the step direction and the steps to the first line.
+** step      : direction between cells: +1 if dir is positive, else -1.
+** side_dist : steps from the start to the first vertical (horizontal) line.
+**             Cell map spans map .. map + 1, so its left (top) line is map
+**             and its right (bottom) line is map + 1.
+**             Going right (down): (map + 1 - pos) cells to that line.
+**             Going left (up): (pos - map) cells to that line.
+**             Multiplying the cells by delta_dist gives the steps.
 */
 static void	raycast_init_step(t_ray *r, const t_player *p)
 {
@@ -71,12 +72,14 @@ static void	raycast_init_step(t_ray *r, const t_player *p)
 }
 
 /*
-** レイが壁のマスに入るまで、縦線と横線のうち先に越えるほうを1本ずつ越えていく。
-** side_dist : 次の縦線（横線）を越えるのは何歩目か。
-**             小さいほうの線を越えて、隣のマスに移る。
-**             越えたら、さらに次の線（1マス先）の歩数に進めておく。
-** side      : 最後に越えたのが縦線なら 0（東西の面）、横線なら 1（南北の面）。
-** マップは壁で閉じているので、どの向きのレイも必ずどこかの壁で止まる。
+** Until the ray enters a wall cell, crosses one line at a time,
+** whichever of the vertical and horizontal lines comes first.
+** side_dist : at which step the next vertical (horizontal) line is crossed.
+**             The smaller one is crossed, moving to the next cell,
+**             and is then advanced to the line one cell further.
+** side      : 0 if the last line crossed is vertical (east/west face),
+**             1 if it is horizontal (north/south face).
+** The map is closed by walls, so every ray stops at some wall.
 */
 static void	raycast_run_dda(t_ray *r, char **map)
 {
@@ -98,18 +101,20 @@ static void	raycast_run_dda(t_ray *r, char **map)
 }
 
 /*
-** 今の位置と向きから、画面の x 列目に何がどれだけの距離に見えるかを求める。
-** 入力 : プレイヤー（pos, dir, plane）、マップ、画面の列 x
-** 結果 : r->map_x, r->map_y : 当たった壁のマス
-**        r->side            : 当たった面（0: 東西の面、1: 南北の面）
-**        r->perp_dist       : 壁までの垂直距離（カメラ平面からの距離。魚眼にならない）
-** perp_dist : 最後に越えた線までの歩数。side_dist は次の線まで進めてあるので、
-**             1マスぶん（delta_dist）戻す。
-**             p->dir の長さが 1 なので、どのレイも1歩で前に 1 進む。
-**             だから歩数がそのまま前方向の距離（垂直距離）になる。
-** 壁にぴったりくっつくと perp_dist が 0 に近くなり、壁の高さを求める割り算が
-** 壊れるから、下限を 1e-4 にしておく。
-** 参考: https://lodev.org/cgtutor/raycasting.html
+** From the current position and direction, finds what is seen in
+** column x of the screen and how far away it is.
+** Input  : the player (pos, dir, plane), the map, the screen column x
+** Output : r->map_x, r->map_y : the wall cell that was hit
+**          r->side            : the face hit (0: east/west, 1: north/south)
+**          r->perp_dist       : perpendicular distance to the wall
+**                               (from the camera plane: no fisheye)
+** perp_dist : steps to the last line crossed. side_dist is already at
+**             the next line, so it goes back one cell (delta_dist).
+**             p->dir has length 1, so every ray moves 1 forward per step,
+**             which makes the steps the forward (perpendicular) distance.
+** Right next to a wall, perp_dist gets close to 0 and would break the
+** division for the wall height, so it is at least 1e-4.
+** Reference: https://lodev.org/cgtutor/raycasting.html
 */
 void	raycast_cast(t_ray *r, const t_player *p, char **map, int x)
 {
