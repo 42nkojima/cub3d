@@ -35,5 +35,6 @@ bool	line_to_list(char *line, t_list **list);
 bool	convert_list_to_array(t_vars *vars, t_list *list);
 bool	is_map_closed(t_vars *vars);
 bool	set_color(t_vars *vars, char *line, char c);
+bool	set_texture(t_vars *vars, t_dir dir, char *path);
 
 #endif

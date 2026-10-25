@@ -15,20 +15,18 @@
 bool	parse_element_line(char *line, t_vars *vars)
 {
 	if (line[0] == 'N' && line[1] == 'O' && !vars->tex_path[NORTH])
-		vars->tex_path[NORTH] = ft_strdup(line + 3);
+		return (set_texture(vars, NORTH, line + 3));
 	else if (line[0] == 'S' && line[1] == 'O' && !vars->tex_path[SOUTH])
-		vars->tex_path[SOUTH] = ft_strdup(line + 3);
+		return (set_texture(vars, SOUTH, line + 3));
 	else if (line[0] == 'W' && line[1] == 'E' && !vars->tex_path[WEST])
-		vars->tex_path[WEST] = ft_strdup(line + 3);
+		return (set_texture(vars, WEST, line + 3));
 	else if (line[0] == 'E' && line[1] == 'A' && !vars->tex_path[EAST])
-		vars->tex_path[EAST] = ft_strdup(line + 3);
+		return (set_texture(vars, EAST, line + 3));
 	else if (line[0] == 'F' && vars->floor_color == -1)
 		return (set_color(vars, line + 2, 'f'));
 	else if (line[0] == 'C' && vars->ceiling_color == -1)
 		return (set_color(vars, line + 2, 'c'));
-	else
-		return (false);
-	return (true);
+	return (false);
 }
 
 bool	is_all_config_set(t_vars *vars)
