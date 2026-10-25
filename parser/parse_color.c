@@ -39,12 +39,24 @@ static bool	is_color_value(char *s)
 	return (s[digits] == '\0' || s[digits] == '\n');
 }
 
+static int	rgb_to_color(char **rgb)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r > 255 || g > 255 || b > 255)
+		return (-1);
+	return (r << 16 | g << 8 | b);
+}
+
 bool	set_color(t_vars *vars, char *line, char c)
 {
 	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
+	int		color;
 
 	while (*line == ' ')
 		line++;
@@ -54,15 +66,13 @@ bool	set_color(t_vars *vars, char *line, char c)
 	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] || !is_color_value(rgb[0])
 		|| !is_color_value(rgb[1]) || !is_color_value(rgb[2]))
 		return (free_split(rgb), false);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
+	color = rgb_to_color(rgb);
 	free_split(rgb);
-	if (r > 255 || g > 255 || b > 255)
+	if (color == -1)
 		return (false);
 	if (c == 'c')
-		vars->ceiling_color = (r << 16 | g << 8 | b);
+		vars->ceiling_color = color;
 	else if (c == 'f')
-		vars->floor_color = (r << 16 | g << 8 | b);
+		vars->floor_color = color;
 	return (true);
 }
