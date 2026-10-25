@@ -48,14 +48,13 @@ static void	render_load_textures(t_vars *v)
 	}
 }
 
-bool	render_run(t_vars *v)
+void	render_run(t_vars *v)
 {
 	if (!render_open_window(v))
-		return (false);
+		handle_error(v, "failed to open window", NULL);
 	render_load_textures(v);
 	raycast_init_player(v);
 	render_frame(v);
 	render_set_hooks(v);
 	mlx_loop(v->mlx);
-	return (true);
 }

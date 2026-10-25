@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub_error.h"
-#include "libft.h"
 #include "render.h"
 #include "parse.h"
 
@@ -20,7 +18,6 @@ int	main(int ac, char **av)
 	t_vars	v;
 
 	parse(ac, av, &v);
-	if (!render_run(&v))
-		handle_error(&v, "failed to open window", NULL);
+	render_run(&v);
 	return (0);
 }

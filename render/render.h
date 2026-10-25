@@ -16,7 +16,7 @@
 # include "cub.h"
 # include <stdbool.h>
 
-bool	render_run(t_vars *v);
+void	render_run(t_vars *v);
 void	render_frame(t_vars *v);
 void	render_draw_walls(t_vars *v);
 void	render_put_pixel(t_img *img, int x, int y, int color);
