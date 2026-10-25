@@ -11,11 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub_error.h"
-#include "libft.h"
 #include "mlx.h"
 #include "raycast.h"
 #include "render.h"
-#include <stdlib.h>
 
 static bool	render_open_window(t_vars *v)
 {
@@ -31,39 +29,6 @@ static bool	render_open_window(t_vars *v)
 	v->img.addr = mlx_get_data_addr(v->img.ptr, &v->img.bpp, &v->img.line_len,
 			&v->img.endian);
 	return (true);
-}
-
-static void	render_append_nbr(char *buf, size_t size, int n)
-{
-	char	*s;
-
-	s = ft_itoa(n);
-	if (!s)
-		return ;
-	ft_strlcat(buf, s, size);
-	free(s);
-}
-
-static void	render_put_info(const t_vars *v)
-{
-	char	buf[64];
-	char	dir[2];
-
-	buf[0] = '\0';
-	dir[0] = "NSWE"[v->direction];
-	dir[1] = '\0';
-	ft_strlcat(buf, "map: ", sizeof(buf));
-	render_append_nbr(buf, sizeof(buf), v->width);
-	ft_strlcat(buf, "x", sizeof(buf));
-	render_append_nbr(buf, sizeof(buf), v->height);
-	ft_strlcat(buf, "  player: ", sizeof(buf));
-	ft_strlcat(buf, dir, sizeof(buf));
-	ft_strlcat(buf, " (", sizeof(buf));
-	render_append_nbr(buf, sizeof(buf), v->col);
-	ft_strlcat(buf, ",", sizeof(buf));
-	render_append_nbr(buf, sizeof(buf), v->row);
-	ft_strlcat(buf, ")", sizeof(buf));
-	mlx_string_put(v->mlx, v->win, 20, 20, 0xFFFFFF, buf);
 }
 
 static void	render_load_textures(t_vars *v)
@@ -90,7 +55,6 @@ bool	render_run(t_vars *v)
 	render_load_textures(v);
 	raycast_init_player(v);
 	render_frame(v);
-	render_put_info(v);
 	render_set_hooks(v);
 	mlx_loop(v->mlx);
 	return (true);
