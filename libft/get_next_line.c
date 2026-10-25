@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:56:12 by nkojima           #+#    #+#             */
-/*   Updated: 2025/12/09 00:00:00 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/25 17:26:56 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,9 @@ char	*get_next_line(int fd)
 {
 	static char	*stored_data = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
+		return (free(stored_data), stored_data = NULL, NULL);
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!stored_data || !ft_strchr(stored_data, '\n'))
 		stored_data = read_until_newline(fd, stored_data);
