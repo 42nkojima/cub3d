@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/23 09:20:43 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/25 14:21:11 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ static bool	check_line(t_vars *vars, char *line)
 	return (true);
 }
 
-static bool	process_line(t_vars *vars, t_list **list, char *line)
+static bool	process_line(t_vars *vars, t_list **list,
+	char *line, bool *map_ended)
 {
 	if (is_empty_line(line))
 	{
-		if (*list == NULL)
-		{
-			free(line);
-			return (true);
-		}
-		return (free(line), false);
+		free(line);
+		if (*list != NULL)
+			*map_ended = true;
+		return (true);
 	}
+	if (*map_ended)
+		return (free(line), false);
 	if (!check_line(vars, line) || !line_to_list(line, list))
 		return (free(line), false);
 	vars->height++;
@@ -69,12 +70,14 @@ bool	parse_map(int fd, t_vars *vars)
 {
 	char	*line;
 	t_list	*list;
+	bool	map_ended;
 
 	list = NULL;
+	map_ended = false;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!process_line(vars, &list, line))
+		if (!process_line(vars, &list, line, &map_ended))
 		{
 			clear_all_list(list);
 			return (false);
