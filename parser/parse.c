@@ -6,11 +6,12 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:44 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 17:24:15 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/25 14:54:59 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parse.h>
+#include "cub_error.h"
 
 static void	trim_newline(char *str)
 {
@@ -58,21 +59,26 @@ void	setup_vars(t_vars *vars)
 	vars->col = -1;
 }
 
-bool	parse(int ac, char **av, t_vars *vars)
+void	parse(int ac, char **av, t_vars *vars)
 {
 	int	fd;
 
-	if (!check_args(ac, av))
-		return (false);
 	setup_vars(vars);
+	if (!check_args(ac, av))
+		handle_error(vars, "args error", NULL);
 	fd = open(av[1], O_RDONLY);
-	if (!fd)
-		return (false);
-	if (parse_config(fd, vars) && parse_map(fd, vars))
+	if (fd < 0)
+		handle_error(vars, "Failed to open file", NULL);
+	if (!parse_config(fd, vars))
 	{
-		clean_all_newlines(vars);
 		close(fd);
-		return (true);
+		handle_error(vars, "Invalid color code or texture path", NULL);
 	}
-	return (false);
+	if (!parse_map(fd, vars))
+	{
+		close(fd);
+		handle_error(vars, "Invalid map", NULL);
+	}
+	clean_all_newlines(vars);
+	close(fd);
 }
