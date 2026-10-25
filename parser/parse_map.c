@@ -24,7 +24,7 @@ static int	line_to_direction(char c)
 		return (WEST);
 }
 
-static bool	check_line(t_vars *vars, char *line)
+static bool	check_line(t_vars *v, char *line)
 {
 	int	i;
 
@@ -37,18 +37,18 @@ static bool	check_line(t_vars *vars, char *line)
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
 		{
-			if (vars->col != -1)
+			if (v->col != -1)
 				return (false);
-			vars->row = vars->height;
-			vars->col = i;
-			vars->direction = line_to_direction(line[i]);
+			v->row = v->height;
+			v->col = i;
+			v->direction = line_to_direction(line[i]);
 		}
 		i++;
 	}
 	return (true);
 }
 
-static bool	process_line(t_vars *vars, t_list **list,
+static bool	process_line(t_vars *v, t_list **list,
 	char *line, bool *map_ended)
 {
 	if (is_empty_line(line))
@@ -60,13 +60,13 @@ static bool	process_line(t_vars *vars, t_list **list,
 	}
 	if (*map_ended)
 		return (free(line), false);
-	if (!check_line(vars, line) || !line_to_list(line, list))
+	if (!check_line(v, line) || !line_to_list(line, list))
 		return (free(line), false);
-	vars->height++;
+	v->height++;
 	return (true);
 }
 
-bool	parse_map(int fd, t_vars *vars)
+bool	parse_map(int fd, t_vars *v)
 {
 	char	*line;
 	t_list	*list;
@@ -77,15 +77,15 @@ bool	parse_map(int fd, t_vars *vars)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!process_line(vars, &list, line, &map_ended))
+		if (!process_line(v, &list, line, &map_ended))
 		{
 			clear_all_list(list);
 			return (false);
 		}
 		line = get_next_line(fd);
 	}
-	if (vars->col == -1 || !convert_list_to_array(vars, list)
-		|| !is_map_closed(vars))
+	if (v->col == -1 || !convert_list_to_array(v, list)
+		|| !is_map_closed(v))
 	{
 		clear_all_list(list);
 		return (false);

@@ -50,21 +50,21 @@ static char	*pad_line(char *line, int width)
 	return (row);
 }
 
-bool	convert_list_to_array(t_vars *vars, t_list *list)
+bool	convert_list_to_array(t_vars *v, t_list *list)
 {
 	int	i;
 
 	if (!list)
 		return (false);
-	vars->map = ft_calloc(vars->height + 1, sizeof(*vars->map));
-	if (!vars->map)
+	v->map = ft_calloc(v->height + 1, sizeof(*v->map));
+	if (!v->map)
 		return (false);
-	vars->width = map_width(list);
+	v->width = map_width(list);
 	i = 0;
 	while (list)
 	{
-		vars->map[i] = pad_line(list->content, vars->width);
-		if (!vars->map[i])
+		v->map[i] = pad_line(list->content, v->width);
+		if (!v->map[i])
 			return (false);
 		list = list->next;
 		i++;

@@ -24,17 +24,17 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-bool	parse_config(int fd, t_vars *vars);
-bool	parse_map(int fd, t_vars *vars);
-void	parse(int ac, char **av, t_vars *vars);
+bool	parse_config(int fd, t_vars *v);
+bool	parse_map(int fd, t_vars *v);
+void	parse(int ac, char **av, t_vars *v);
 bool	is_empty_line(char *line);
 t_list	*ft_lstnew(char *content);
 t_list	*ft_lstlast(t_list *lst);
 void	clear_all_list(t_list *list);
 bool	line_to_list(char *line, t_list **list);
-bool	convert_list_to_array(t_vars *vars, t_list *list);
-bool	is_map_closed(t_vars *vars);
-bool	set_color(t_vars *vars, char *line, char c);
-bool	set_texture(t_vars *vars, t_dir dir, char *path);
+bool	convert_list_to_array(t_vars *v, t_list *list);
+bool	is_map_closed(t_vars *v);
+bool	set_color(t_vars *v, char *line, char c);
+bool	set_texture(t_vars *v, t_dir dir, char *path);
 
 #endif
