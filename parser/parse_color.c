@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 13:38:32 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/25 13:42:53 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/25 15:14:30 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,29 @@ static int	rgb_to_color(char **rgb)
 	return (r << 16 | g << 8 | b);
 }
 
+static int	count_commas(char *line)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 bool	set_color(t_vars *vars, char *line, char c)
 {
 	char	**rgb;
 	int		color;
 
+	if (count_commas(line) != 2)
+		return (false);
 	rgb = ft_split(line, ',');
 	if (!rgb)
 		return (false);
