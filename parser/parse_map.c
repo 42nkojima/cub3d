@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:19:38 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/25 14:12:29 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/25 14:21:11 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static bool	check_line(t_vars *vars, char *line)
 	return (true);
 }
 
-static bool	process_line(t_vars *vars, t_list **list, char *line, bool *map_ended)
+static bool	process_line(t_vars *vars, t_list **list,
+	char *line, bool *map_ended)
 {
 	if (is_empty_line(line))
 	{
