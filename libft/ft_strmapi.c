@@ -59,21 +59,21 @@ char	*ft_strmapi(char const *str, char (*f)(unsigned int, char))
 // 	char	*str1;
 // 	char	*result;
 
-// 	// Test 1: a normal string to uppercase
+// 	// テスト1: 通常の文字列を大文字に変換
 // 	str1 = "hello world";
-// 	printf("Test 1: uppercase\n");
-// 	printf("original: %s\n", str1);
+// 	printf("テスト1: 大文字変換\n");
+// 	printf("元の文字列: %s\n", str1);
 // 	result = ft_strmapi(str1, to_upper);
-// 	printf("result: %s\n", result);
-// 	printf("expected: HELLO WORLD\n");
-// 	printf("status: %s\n\n", strcmp(result, "HELLO WORLD") == 0 ? "OK" : "KO");
+// 	printf("変換後: %s\n", result);
+// 	printf("期待値: HELLO WORLD\n");
+// 	printf("結果: %s\n\n", strcmp(result, "HELLO WORLD") == 0 ? "成功" : "失敗");
 // 	free(result);
-// 	// Test 2: empty string
-// 	printf("Test 2: empty string\n");
+// 	// テスト2: 空文字列
+// 	printf("テスト2: 空文字列\n");
 // 	result = ft_strmapi("", to_upper);
-// 	printf("result: \"%s\"\n", result);
-// 	printf("expected: \"\"\n");
-// 	printf("status: %s\n", strcmp(result, "") == 0 ? "OK" : "KO");
+// 	printf("変換後: \"%s\"\n", result);
+// 	printf("期待値: \"\"\n");
+// 	printf("結果: %s\n", strcmp(result, "") == 0 ? "成功" : "失敗");
 // 	free(result);
 // 	return (0);
 // }

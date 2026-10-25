@@ -55,29 +55,29 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 // {
 // 	char	*result;
 
-// 	// Test case 1: normal substring
+// 	// テストケース 1: 通常の部分文字列
 // 	result = ft_substr("Hello, world!", 7, 5);
-// 	printf("Test 1: %s\n", result); // expected: "world"
+// 	printf("Test 1: %s\n", result); // 期待値: "world"
 // 	free(result);
-// 	// Test case 2: start is past the end
+// 	// テストケース 2: start が文字列の長さを超える
 // 	result = ft_substr("Hello, world!", 20, 5);
-// 	printf("Test 2: %s\n", result); // expected: ""
+// 	printf("Test 2: %s\n", result); // 期待値: ""
 // 	free(result);
-// 	// Test case 3: len is longer than the rest
+// 	// テストケース 3: len が文字列の残りの長さを超える
 // 	result = ft_substr("Hello, world!", 7, 50);
-// 	printf("Test 3: %s\n", result); // expected: "world!"
+// 	printf("Test 3: %s\n", result); // 期待値: "world!"
 // 	free(result);
-// 	// Test case 4: substring of an empty string
+// 	// テストケース 4: 空文字列から部分文字列を取得
 // 	result = ft_substr("", 0, 5);
-// 	printf("Test 4: %s\n", result); // expected: ""
+// 	printf("Test 4: %s\n", result); // 期待値: ""
 // 	free(result);
-// 	// Test case 5: len is 0
+// 	// テストケース 5: len が 0 の場合
 // 	result = ft_substr("Hello, world!", 7, 0);
-// 	printf("Test 5: %s\n", result); // expected: ""
+// 	printf("Test 5: %s\n", result); // 期待値: ""
 // 	free(result);
-// 	// Test case 6: pass a NULL pointer
+// 	// テストケース 6: NULL ポインタを渡す
 // 	result = ft_substr(NULL, 0, 5);
-// 	printf("Test 6: %s\n", result); // expected: undefined behavior (as in libc)
+// 	printf("Test 6: %s\n", result); // 期待値: 未定義動作（Cの設計思想に基づく）
 // 	free(result);
 // 	return (0);
 // }

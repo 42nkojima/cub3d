@@ -61,7 +61,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 // 			- (unsigned char *)target);
 // 	else
 // 		printf("ft: not found");
-// 	// standard
+// 	// 標準
 // 	ptr = memchr(target, search, sizeof(target));
 // 	if (ptr)
 // 		printf("  : found at index %ld\n", (unsigned char *)ptr

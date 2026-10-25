@@ -38,7 +38,7 @@ size_t	ft_strlen(const char *str)
 // {
 // 	printf("ft_strlen(): %zu\n", ft_strlen("42tokyo"));
 // 	printf("strlen(): %lu\n", strlen("42tokyo"));
-// 	printf("ft_strlen(): %zu\n", ft_strlen("hello"));
-// 	printf("strlen(): %lu\n", strlen("hello"));
+// 	printf("ft_strlen(): %zu\n", ft_strlen("あいうえお"));
+// 	printf("strlen(): %lu\n", strlen("あいうえお"));
 // 	return (0);
 // }
