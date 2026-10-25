@@ -24,8 +24,8 @@ static int	render_on_close(t_vars *v)
 }
 
 /*
-** ウィンドウが隠れたあと見えるようになったとき (Expose) に、画像を貼り直す。
-** 画像バッファには最後に描いた描画が残っているから、計算し直す必要はない。
+** Puts the image back when the window becomes visible again (Expose).
+** The image buffer still holds the last frame, so no need to redraw.
 */
 static int	render_on_expose(t_vars *v)
 {

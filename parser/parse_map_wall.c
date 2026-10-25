@@ -25,9 +25,10 @@ static bool	is_outside(t_vars *v, int y, int x)
 }
 
 /*
-** 歩けるマスの上下左右に、マップの外かスペースがあったら囲まれていない。
-** 斜めは見なくていい。DDA も移動も x と y を片方ずつしか進まないので、
-** 斜めの隙間からは抜けられない。
+** The map is not closed if a walkable cell has the outside or a space
+** above, below, left or right of it.
+** Diagonals do not matter: the DDA and the movement both advance x and y
+** one at a time, so nothing can slip through a diagonal gap.
 */
 bool	is_map_closed(t_vars *v)
 {

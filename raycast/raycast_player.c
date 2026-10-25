@@ -14,12 +14,12 @@
 #include <math.h>
 
 /*
-** マップの N・S・W・E に合わせて、プレイヤーの位置と向きを決める。
-** pos   : マスの真ん中に立たせるため +0.5 する。
-** dir   : t_dir の並び（NORTH, SOUTH, WEST, EAST）の順に、向きの表から選ぶ。
-**         y は下に行くほど大きいので、北は (0, -1)。
-** plane : dir を右に 90° 回した (-dir_y, dir_x) に、視野の広さ PLANE_LEN をかける。
-**         dir と同じように回さないと、画面が左右反転したり歪んだりする。
+** Sets the player position and direction from N, S, W or E in the map.
+** pos   : +0.5 to stand in the middle of the cell.
+** dir   : picked from the table in t_dir order (NORTH, SOUTH, WEST, EAST).
+**         y grows downward, so north is (0, -1).
+** plane : dir turned 90 degrees right (-dir_y, dir_x), times PLANE_LEN.
+**         If it does not match dir, the screen is mirrored or distorted.
 */
 void	raycast_init_player(t_vars *v)
 {
@@ -34,10 +34,10 @@ void	raycast_init_player(t_vars *v)
 }
 
 /*
-** ベクトル (x, y) を angle (ラジアン) だけ回す。
-** 回転の公式を使う。 https://mathlandscape.com/rotation-matrix/
-** x を先に書き換えると y の計算で新しい x を使ってしまうから、元の x は取っておく。
-** y は下に行くほど大きいから、angle が正だと見た目は右回りになる。
+** Rotates the vector (x, y) by angle (in radians).
+** Uses the rotation formula: https://mathlandscape.com/rotation-matrix/
+** The old x is kept, as y would otherwise be computed with the new x.
+** y grows downward, so a positive angle turns clockwise on screen.
 */
 static void	raycast_rotate_vec(double *x, double *y, double angle)
 {
@@ -49,8 +49,9 @@ static void	raycast_rotate_vec(double *x, double *y, double angle)
 }
 
 /*
-** プレイヤーの向きを angle だけ回す。
-** dir と plane を同じ角度だけ回すから、長さも直角の関係も変わらず、画面が歪まない。
+** Rotates the player direction by angle.
+** dir and plane turn by the same angle, so their lengths and the right
+** angle between them stay the same and the screen is not distorted.
 */
 void	raycast_rotate(t_player *p, double angle)
 {
@@ -59,10 +60,12 @@ void	raycast_rotate(t_player *p, double angle)
 }
 
 /*
-** プレイヤーを (dx, dy) の向きに MOVE_SPEED だけ動かす。動いた先が壁のマスなら動かない。
-** 壁のマスに入ると DDA のスタート地点が壁になって描画が壊れ、マップの外に出ると落ちてしまうため。
-** x と y を別々にチェックするから、斜めに壁にぶつかっても壁に沿って滑れる。
-** マップが壁で閉じていることはパーサーが保証するので、'1' かどうかだけ見ればいい。
+** Moves the player by MOVE_SPEED toward (dx, dy), but not into a wall cell.
+** In a wall cell the DDA would start inside a wall and break the drawing,
+** and leaving the map would crash.
+** x and y are checked separately, so the player slides along a wall
+** when hitting it at an angle.
+** The parser makes sure the map is closed, so checking for '1' is enough.
 */
 void	raycast_move(t_player *p, char **map, double dx, double dy)
 {

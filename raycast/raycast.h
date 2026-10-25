@@ -19,7 +19,7 @@
 # define ROT_SPEED 0.05
 # define MOVE_SPEED 0.1
 
-// 描画側 (render) は使うだけで中身は知らなくていいから、 cub.h じゃなくてこっちに置く
+// Kept here, not in cub.h: render only uses it and needs no details.
 typedef struct s_ray
 {
 	double	dir_x;
