@@ -27,14 +27,14 @@ static void	trim_newline(char *str)
 	}
 }
 
-void	clean_all_newlines(t_vars *vars)
+void	clean_all_newlines(t_vars *v)
 {
-	if (!vars)
+	if (!v)
 		return ;
-	trim_newline(vars->tex_path[NORTH]);
-	trim_newline(vars->tex_path[SOUTH]);
-	trim_newline(vars->tex_path[WEST]);
-	trim_newline(vars->tex_path[EAST]);
+	trim_newline(v->tex_path[NORTH]);
+	trim_newline(v->tex_path[SOUTH]);
+	trim_newline(v->tex_path[WEST]);
+	trim_newline(v->tex_path[EAST]);
 }
 
 bool	check_args(int ac, char **av)
@@ -51,34 +51,34 @@ bool	check_args(int ac, char **av)
 	return (true);
 }
 
-void	setup_vars(t_vars *vars)
+void	setup_vars(t_vars *v)
 {
-	ft_bzero(vars, sizeof(*vars));
-	vars->ceiling_color = -1;
-	vars->floor_color = -1;
-	vars->col = -1;
+	ft_bzero(v, sizeof(*v));
+	v->ceiling_color = -1;
+	v->floor_color = -1;
+	v->col = -1;
 }
 
-void	parse(int ac, char **av, t_vars *vars)
+void	parse(int ac, char **av, t_vars *v)
 {
 	int	fd;
 
-	setup_vars(vars);
+	setup_vars(v);
 	if (!check_args(ac, av))
-		handle_error(vars, "args error", NULL);
+		handle_error(v, "args error", NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		handle_error(vars, "Failed to open file", NULL);
-	if (!parse_config(fd, vars))
+		handle_error(v, "Failed to open file", NULL);
+	if (!parse_config(fd, v))
 	{
 		close(fd);
-		handle_error(vars, "Invalid color code or texture path", NULL);
+		handle_error(v, "Invalid color code or texture path", NULL);
 	}
-	if (!parse_map(fd, vars))
+	if (!parse_map(fd, v))
 	{
 		close(fd);
-		handle_error(vars, "Invalid map", NULL);
+		handle_error(v, "Invalid map", NULL);
 	}
-	clean_all_newlines(vars);
+	clean_all_newlines(v);
 	close(fd);
 }

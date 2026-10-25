@@ -12,8 +12,8 @@
 
 #include "parse.h"
 
-bool	set_texture(t_vars *vars, t_dir dir, char *path)
+bool	set_texture(t_vars *v, t_dir dir, char *path)
 {
-	vars->tex_path[dir] = ft_strdup(path);
-	return (vars->tex_path[dir] != NULL);
+	v->tex_path[dir] = ft_strdup(path);
+	return (v->tex_path[dir] != NULL);
 }

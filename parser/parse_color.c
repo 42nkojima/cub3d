@@ -69,7 +69,7 @@ static int	count_commas(char *line)
 	return (count);
 }
 
-bool	set_color(t_vars *vars, char *line, char c)
+bool	set_color(t_vars *v, char *line, char c)
 {
 	char	**rgb;
 	int		color;
@@ -87,8 +87,8 @@ bool	set_color(t_vars *vars, char *line, char c)
 	if (color == -1)
 		return (false);
 	if (c == 'c')
-		vars->ceiling_color = color;
+		v->ceiling_color = color;
 	else if (c == 'f')
-		vars->floor_color = color;
+		v->floor_color = color;
 	return (true);
 }
