@@ -6,7 +6,7 @@
 /*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 14:15:44 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/25 14:54:59 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/25 17:28:06 by tmase            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ void	parse(int ac, char **av, t_vars *v)
 		handle_error(v, "Failed to open file", NULL);
 	if (!parse_config(fd, v))
 	{
+		get_next_line(-1);
 		close(fd);
 		handle_error(v, "Invalid color code or texture path", NULL);
 	}
 	if (!parse_map(fd, v))
 	{
+		get_next_line(-1);
 		close(fd);
 		handle_error(v, "Invalid map", NULL);
 	}
