@@ -28,23 +28,12 @@ static void	trim_newline(char *str)
 
 void	clean_all_newlines(t_vars *vars)
 {
-	int	i;
-
 	if (!vars)
 		return ;
 	trim_newline(vars->tex_path[NORTH]);
 	trim_newline(vars->tex_path[SOUTH]);
 	trim_newline(vars->tex_path[WEST]);
 	trim_newline(vars->tex_path[EAST]);
-	if (vars->map)
-	{
-		i = 0;
-		while (vars->map[i])
-		{
-			trim_newline(vars->map[i]);
-			i++;
-		}
-	}
 }
 
 bool	check_args(int ac, char **av)
@@ -66,6 +55,7 @@ void	setup_vars(t_vars *vars)
 	ft_bzero(vars, sizeof(*vars));
 	vars->ceiling_color = -1;
 	vars->floor_color = -1;
+	vars->col = -1;
 }
 
 bool	parse(int ac, char **av, t_vars *vars)

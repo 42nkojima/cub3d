@@ -6,10 +6,11 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:27:30 by nkojima           #+#    #+#             */
-/*   Updated: 2026/10/11 16:21:02 by nkojima          ###   ########.fr       */
+/*   Updated: 2026/10/23 06:42:01 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub_error.h"
 #include "libft.h"
 #include "mlx.h"
 #include "raycast.h"
@@ -65,10 +66,28 @@ static void	render_put_info(const t_vars *v)
 	mlx_string_put(v->mlx, v->win, 20, 20, 0xFFFFFF, buf);
 }
 
+static void	render_load_textures(t_vars *v)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		v->tex[i].ptr = mlx_xpm_file_to_image(v->mlx, v->tex_path[i],
+				&v->tex[i].w, &v->tex[i].h);
+		if (!v->tex[i].ptr)
+			handle_error(v, "failed to load texture", v->tex_path[i]);
+		v->tex[i].addr = mlx_get_data_addr(v->tex[i].ptr, &v->tex[i].bpp,
+				&v->tex[i].line_len, &v->tex[i].endian);
+		i++;
+	}
+}
+
 bool	render_run(t_vars *v)
 {
 	if (!render_open_window(v))
 		return (false);
+	render_load_textures(v);
 	raycast_init_player(v);
 	render_frame(v);
 	render_put_info(v);

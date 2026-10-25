@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmase <tmase@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 20:20:07 by tmase             #+#    #+#             */
-/*   Updated: 2026/10/17 15:50:36 by tmase            ###   ########.fr       */
+/*   Updated: 2026/10/23 11:29:54 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+static void	free_split(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+		free(strs[i++]);
+	free(strs);
+}
 
 bool	set_color(t_vars *vars, char *line, char c)
 {
@@ -23,13 +33,12 @@ bool	set_color(t_vars *vars, char *line, char c)
 	rgb = ft_split(line, ',');
 	if (!rgb)
 		return (false);
+	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		return (free_split(rgb), false);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
-	free(rgb[0]);
-	free(rgb[1]);
-	free(rgb[2]);
-	free(rgb);
+	free_split(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (false);
 	color = (r << 16 | g << 8 | b);
